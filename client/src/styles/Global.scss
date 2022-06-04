@@ -1,0 +1,20 @@
+* {
+    font-family: $font;
+}
+
+body, main {
+    background-color: $off-white;
+}
+
+main {
+    width: 1100px;
+    margin: auto;
+}
+
+
+h1 {
+    display: inline-block;
+    color: $black;
+    letter-spacing: $reduce;
+    padding-top: 0.25rem;
+}

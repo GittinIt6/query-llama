@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../../images/query-llama-logo.svg'
 
 import Auth from '../../utils/auth';
 
@@ -9,36 +10,36 @@ const Header = () => {
     Auth.logout();
   };
   return (
-    <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
-      <div className="container flex-row justify-space-between-lg justify-center align-center">
-        <div>
-          <Link className="text-light" to="/">
-            <h1 className="m-0">Tech Thoughts</h1>
-          </Link>
-          <p className="m-0">Get into the mind of a programmer.</p>
+    <header className="">
+      <div className="logo-title-container">
+        <div className='logo-title-flex-wrapper'>
+            <img src={Logo} alt="" />
+            <Link className="" to="/">
+              <h1 className="">QueryLlama</h1>
+            </Link>
         </div>
-        <div>
+      </div>
+        <div className='login-signup-ui'>
           {Auth.loggedIn() ? (
             <>
-              <Link className="btn btn-lg btn-info m-2" to="/me">
+              <Link className="" to="/me">
                 {Auth.getProfile().data.username}'s profile
               </Link>
-              <button className="btn btn-lg btn-light m-2" onClick={logout}>
+              <button className="" onClick={logout}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link className="btn btn-lg btn-info m-2" to="/login">
+              <Link className="" to="/login">
                 Login
               </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/signup">
+              <Link className="" to="/signup">
                 Signup
               </Link>
             </>
           )}
         </div>
-      </div>
     </header>
   );
 };

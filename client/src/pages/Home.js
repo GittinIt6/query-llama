@@ -10,7 +10,13 @@ const Home = () => {
 
   return (
     <main>
+      <section className='question-cards-container'>
       <QuestionCard />
+      <QuestionCard />
+      <QuestionCard />
+      <QuestionCard />
+      <QuestionCard />
+      </section>
     </main>
   );
 };
