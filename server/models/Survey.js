@@ -4,7 +4,7 @@ const surveySchema = new Schema({
     question: {
         type: String,
         required: true,
-        trim: true,
+
     },
     upvotes: {
         type: Number,
