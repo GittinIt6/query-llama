@@ -27,30 +27,31 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addSurvey: async (parent, { question, isPublic, expireTime, surveyAuthor }, context) => {
-      // if (context.user) {
-      //   const survey = await Survey.create({
-      //     question,
-      //     isPublic,
-      //     expireTime,
-      //     surveyAuthor: context.user.username,
-      //   });
+    // addSurvey: async (parent, { question, isPublic, expireTime }, context) => {
+    //   if (context.user) {
+    //     const survey = await Survey.create({
+    //       question,
+    //       isPublic,
+    //       expireTime,
+    //       surveyAuthor: context.user.username,
+    //     });
 
-      //   await User.findOneAndUpdate(
-      //     { _id: context.user._id },
-      //     { $addToSet: { surveys: survey._id } }
-      //   );
+    //     await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $addToSet: { surveys: survey._id } }
+    //     );
 
-      //   return survey;
-      // }
+    //     return survey;
+    //   }
+    // },
+    addSurvey: async (parent, { question, isPublic, expireTime, surveryAuthor }) => {
       const survey = await Survey.create({
-            question,
-            isPublic,
-            expireTime,
-            surveyAuthor,
-          });
+        question,
+        isPublic,
+        expireTime,
+        surveryAuthor,
+      });
       return survey;
-
     },
     addAnswer: async (parent, { surveyId, answerText }) => {
       return Survey.findOneAndUpdate(
