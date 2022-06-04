@@ -15,13 +15,16 @@ const typeDefs = gql`
     downvotes: Int
     answerNum: String
     isValid: Boolean
+    isPublic: Boolean
     expireTime: String
+    surveyAuthor: String
     answers: [Answer]!
   }
 
   type Answer {
     _id: ID
     answerText: String
+    voteCount: Int
   }
 
   type Auth {
@@ -39,6 +42,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addSurvey(question: String!, isPublic: Boolean!, expireTime: String): Survey
+    addAnswer(surveyId: ID!, answerText: String!): Survey
   }
 `;
 
