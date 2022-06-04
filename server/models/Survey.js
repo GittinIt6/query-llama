@@ -9,10 +9,12 @@ const surveySchema = new Schema({
     upvotes: {
         type: Number,
         required: true,
+        default: 0
     },
     downvotes: {
         type: Number,
         required: true,
+        default: 0
       },
     answerNum: {
         type: String,

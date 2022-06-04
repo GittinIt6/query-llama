@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
-import { ADD_SURVEY } from '../../utils/mutations';
+import { ADD_SURVEY, ADD_ANSWER } from '../../utils/mutations';
 import { QUERY_SURVEYS } from '../../utils/queries';
 
-const SurveyForm = () => {
+const SurveyForm = ({ surveyId }) => {
   const [formState, setFormState] = useState({
     question: '',
     answers: [],
@@ -28,7 +28,31 @@ const SurveyForm = () => {
     },
   });
 
+  const [addAnswer, { answerError }] = useMutation(ADD_ANSWER, {
+    update(cache, { data: { addAnswer }}) {
+
+    }
+  })
+
   const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await addSurvey({
+        variables: { ...formState},
+      });
+
+      setFormState({
+        question: '',
+        answers: [],
+        expireTime: '',
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleChange = (event) => {
     const { name, value} = event.target;
 
     if (name === 'question' && value.length <= 280) {
@@ -37,7 +61,7 @@ const SurveyForm = () => {
     } else if (name !== 'question') {
       setFormState({ ...formState, [name]: value });
     }
-  };
+  }
 
   return (
     <div>
