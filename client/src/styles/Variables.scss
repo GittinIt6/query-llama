@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;700&display=swap');
+
+// Light mode colors
+$black: #333;
+$white: #FFFFFE;
+$off-white: #FFFEFA;
+$grey-dk: #999;
+$grey-lt: #666;
+$red: #FA5246;
+$purple-dk: #6246EA;
+$purple-lt: #A896FB;
+$yellow: #FFBE76;
+
+
+//Box Shadows
+$full-width-shadow-subtle: 0px 1px 3.3px rgba(0, 0, 0, 0.05), 0px 8px 16px rgba(0, 0, 0, 0.1);
+$long-shadow: -10px 10px 0px rgba(0, 0, 0, 1);
+$raised-shadow: -18px 18px 0px $black;
+$short-shadow: -4px 4px 4px rgba(0, 0, 0, 0.4);
+
+
+// Fonts
+$font: 'Mukta', sans-serif;
+
+// Font weights
+$light: 300;
+$regular: 400;
+$heavy: 700;
+
+// Letter spacing reduction
+$reduce: -1px;
+
+
+// Media Queries
+$tabletWidth: "screen and (min-width: 768px)";
+$desktopWidth: "screen and (min-width: 960px)";
+
+
+// Mixins
+@mixin tablet {
+  @media #{$tabletWidth} {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media #{$desktopWidth} {
+    @content;
+  }
+}
