@@ -4,15 +4,17 @@ const surveySchema = new Schema({
     question: {
         type: String,
         required: true,
-        trim: true,
+
     },
     upvotes: {
         type: Number,
-        required: true,
+        required:true,
+        default: 0,
     },
     downvotes: {
         type: Number,
-        required: true,
+        required:true,
+        default: 0,
       },
     answerNum: {
         type: String,

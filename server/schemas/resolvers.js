@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate("surveys");
     },
     user: async (parent, { username }) => {
       return User.findOne({ username });
@@ -27,22 +27,30 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addSurvey: async (parent, { question, isPublic, expireTime }, context) => {
-      if (context.user) {
-        const survey = await Survey.create({
-          question,
-          isPublic,
-          expireTime,
-          surveyAuthor: context.user.username,
-        });
+    addSurvey: async (parent, { question, isPublic, expireTime, surveyAuthor }, context) => {
+      // if (context.user) {
+      //   const survey = await Survey.create({
+      //     question,
+      //     isPublic,
+      //     expireTime,
+      //     surveyAuthor: context.user.username,
+      //   });
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { surveys: survey._id } }
-        );
+      //   await User.findOneAndUpdate(
+      //     { _id: context.user._id },
+      //     { $addToSet: { surveys: survey._id } }
+      //   );
 
-        return survey;
-      }
+      //   return survey;
+      // }
+      const survey = await Survey.create({
+            question,
+            isPublic,
+            expireTime,
+            surveyAuthor,
+          });
+      return survey;
+
     },
     addAnswer: async (parent, { surveyId, answerText }) => {
       return Survey.findOneAndUpdate(
