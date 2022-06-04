@@ -44,12 +44,12 @@ const resolvers = {
     //     return survey;
     //   }
     // },
-    addSurvey: async (parent, { question, isPublic, expireTime, surveryAuthor }) => {
+    addSurvey: async (parent, { question, isPublic, expireTime, surveyAuthor }) => {
       const survey = await Survey.create({
         question,
         isPublic,
         expireTime,
-        surveryAuthor,
+        surveyAuthor,
       });
       return survey;
     },
