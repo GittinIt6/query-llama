@@ -8,6 +8,16 @@ const typeDefs = gql`
     password: String
   }
 
+  type Survey {
+    _id: ID
+    question: String
+    upvotes: Int
+    downvotes: Int
+    answerNum: String
+    isValid: Boolean
+    expireTime: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -17,6 +27,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     me: User
+    surveys: [Survey]
   }
 
   type Mutation {
