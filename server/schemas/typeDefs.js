@@ -16,6 +16,12 @@ const typeDefs = gql`
     answerNum: String
     isValid: Boolean
     expireTime: String
+    answers: [Answer]!
+  }
+
+  type Answer {
+    _id: ID
+    answerText: String
   }
 
   type Auth {
