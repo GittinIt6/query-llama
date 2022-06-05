@@ -1,22 +1,26 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import QuestionCard from '../components/QuestionCard';
 
-
-
+import SurveyCards from '../components/SurveyCards';
+// Import the query we are going to execute from its file
+import { QUERY_SURVEYS } from '../utils/queries';
 
 const Home = () => {
+  const { loading, data } = useQuery(QUERY_SURVEYS);
 
+  // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+  const surveys = data?.surveys || [];
 
   return (
     <main>
-      <section className='question-cards-container'>
-      <QuestionCard />
-      <QuestionCard />
-      <QuestionCard />
-      <QuestionCard />
-      <QuestionCard />
-      </section>
+        {loading ? (
+          <div>loading...</div>
+        ) : (
+            <SurveyCards 
+            surveys={surveys}
+            />
+        )}
+
     </main>
   );
 };

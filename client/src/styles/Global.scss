@@ -7,7 +7,8 @@ body, main {
 }
 
 main {
-    width: 1100px;
+    width: 95%;
+    max-width: 1200px;
     margin: auto;
 }
 
@@ -18,3 +19,9 @@ h1 {
     letter-spacing: $reduce;
     padding-top: 0.25rem;
 }
+
+h2 {
+    font-size: 24px;
+    color: $black;
+}
+
