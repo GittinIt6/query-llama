@@ -1,0 +1,102 @@
+.survey-cards-container {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    gap: 16px;
+    /* gutter size offset */
+    margin: auto;
+    margin-top: 32px;
+  }
+
+  .survey-cards-container_column {
+    background-clip: padding-box;
+  }
+  
+  /* Style your items */
+  .survey-cards-container_column > .survey-card-wrapper { 
+    background-color: $white;
+    border: 1px solid $black;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    box-shadow:
+    -2px 2px 4px rgba(0, 0, 0, 0.125),
+    -6px 6px 12px rgba(0, 0, 0, 0.0675);
+    padding: 12px;
+  }
+
+  .survey-card-ui-icons {
+    color: $black;
+  }
+
+  .upvote-downvote-ui {
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .upvote-downvote-counter {
+    margin-left: 8px;
+  }
+
+  .thumbsdown-icon {
+    margin-left: 12px;
+  }
+
+  .chart-icon {
+    color: $red;
+    float: right;
+  }
+
+  .qusetion-answer-wrapper {
+    margin-left: 4px;
+  }
+
+  .survey-card-question {
+    margin: 24px 0 20px;
+  }
+
+  .top-answer {
+    font-size: 14px;
+    color: $grey-dk;
+  }
+
+  .top-answer .top-answer-label {
+    font-weight: $heavy;
+  }
+
+  .submit-answer-btn {
+    margin: 24px 0;
+    font-size: 18px;
+    font-weight: $heavy;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color .2s;
+  }
+
+  .submit-answer-btn:hover {
+    color: $red;
+  }
+
+  .answer-counter-label {
+    font-size: 14px;
+    color: $grey-lt;
+  }
+
+  .answer-count {
+    font-size: 18px;
+    font-weight: $heavy;
+    margin: 0 4px;
+  }
+
+
+
+  
+
+ 
+
+ 
