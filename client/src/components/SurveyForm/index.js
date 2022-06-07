@@ -10,7 +10,9 @@ import Auth from '../../utils/auth';
 const SurveyForm = ({ surveyId }) => {
   const [question, setQuestion] = useState('');
 
+
   const [characterCount, setCharacterCount] = useState(0);
+  const [characterCount2, setCharacterCount2] = useState(0);
 
   const [addSurvey, { error }] = useMutation(ADD_SURVEY, {
     update(cache, { data: { addSurvey } }) {
@@ -33,37 +35,49 @@ const SurveyForm = ({ surveyId }) => {
     },
   });
 
-  
   const [answerText, setAnswerText] = useState('');
   const [addAnswer, { answerError }] = useMutation(ADD_ANSWER);
     
-  
+  const [surveyData, setSurveyData] = useState({});
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    var data = {};
 
-    try {
-      const { data } = await addSurvey({
+      data = await addSurvey({
         variables: { 
           question,
-          surveyAuthor: Auth.getProfile().data.username,
+          // surveyAuthor: Auth.getProfile().data.username,
+          surveyAuthor: "New Author",
+          isPublic: true
         },
       });
 
-      const { answerData } = await addAnswer({
-        variables: {
-          surveyId,
-          answerText
-        },
-      });
+
+      console.log( JSON.stringify(...data));
+      console.log(`------------------Id for new question is ${data._id}--------------`);
 
       setQuestion('');
-      setAnswerText('');
-    } catch (err) {
-      console.error(err);
-    }
 
   };
+
+
+  // const handleAnswerSubmit = async ({ surveyId }, event) =>{
+  //   event.preventDefault();
+
+  //   try {
+  //     const { answerData } = await addAnswer({
+  //       variables: {
+  //         surveyId,
+  //         answerText
+  //       },
+  //     });
+  //     setAnswerText('');
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
+
 
   const handleChange = (event) => {
     const { name, value} = event.target;
@@ -71,6 +85,11 @@ const SurveyForm = ({ surveyId }) => {
     if (name === 'question' && value.length <= 280) {
       setQuestion(value);
       setCharacterCount(value.length);
+    }
+
+    if (name === 'answer' && value.length <= 280) {
+      setAnswerText(value);
+      setCharacterCount2(value.length);
     }
   }
 
@@ -103,6 +122,8 @@ const SurveyForm = ({ surveyId }) => {
               ></textarea>
             </div>
             
+
+
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">

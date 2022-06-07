@@ -22,7 +22,7 @@ const SurveyCards = ({surveys}) => {
           columnClassName='survey-cards-container_column'>
     {surveys &&
       surveys.map((survey) => (
-        <div key={survey._id} className="survey-card-wrapper">
+        <div id={survey._id} key={survey._id} className="survey-card-wrapper">
         <div className='survey-card-ui'>
         <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
             <div className='upvote-downvote-ui'>
