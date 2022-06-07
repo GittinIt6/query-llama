@@ -22,16 +22,17 @@ const SurveyForm = () => {
       let lastKey = Object.keys(obj).pop();
       let v = obj[lastKey]
       cacheId = v._id
-      console.log(`client src components index.js: obj is: ${obj}`);
-      console.log(`client src components index.js: lastKey is: ${lastKey}`)
-      console.log(`client src components index.js: v is: ${v}`)
-      console.log(`client src components index.js: v._id is: ${v._id}`)
+      console.log(`cacheID line 25: ${cacheId}`);
+      // console.log(`client src components index.js: obj is: ${obj}`);
+      // console.log(`client src components index.js: lastKey is: ${lastKey}`)
+      // console.log(`client src components index.js: v is: ${v}`)
+      // console.log(`client src components index.js: v._id is: ${v._id}`)
       // console.log(cache.data.data[cache.data.data.length - 1]._id);
       // console.log(cache.data.data[cache.data.data.length - 1]._id);
       try {
         const { surveys } = cache.readQuery({ query:
         QUERY_SURVEYS});
-        
+        console.log(`const { surveys } is ${JSON.stringify(surveys)}`);
         console.log(`this is line 34(ish) of index.js: ${JSON.stringify(cache.readQuery({ query: QUERY_ME }))}`)
         cache.writeQuery({
           query: QUERY_SURVEYS,
@@ -41,11 +42,14 @@ const SurveyForm = () => {
       } catch (e) {
         console.error(e)
       }
-      const { me } = cache.readQuery({ query: QUERY_ME });
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, surveys: [...me.surveys, addSurvey] } },
-      });
+      console.log('outside of try');
+      //MJ COMMENT: Commented out below, not sure what it's doing?? me is returning null, I think QUERY_ME isn't working
+      // const { me } = cache.readQuery({ query: QUERY_ME });
+      // console.log(`const me line 47 is: ${me}`);
+      // cache.writeQuery({
+        // query: QUERY_ME,
+        // data: { me: { ...me, surveys: [...me.surveys, addSurvey] } },
+      // });
     },
   });
 
