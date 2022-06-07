@@ -25,7 +25,7 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_SURVEY = gql`
-  mutation addSurvey($question: String!, $isPublic: Boolean!, $surveyAuthor: String!) {
+  mutation addSurvey($question: String!, $isPublic: Boolean, $surveyAuthor: String!) {
   addSurvey(question: $question, isPublic: $isPublic, surveyAuthor: $surveyAuthor) {
     _id
     question

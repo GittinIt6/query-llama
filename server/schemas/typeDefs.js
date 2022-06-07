@@ -43,7 +43,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addSurvey(question: String!, isPublic: Boolean!, expireTime: String, surveyAuthor: String!): Survey
+    addSurvey(question: String!, isPublic: Boolean, expireTime: String, surveyAuthor: String!): Survey
     addAnswer(surveyId: ID!, answerText: String!): Survey
   }
 `;
