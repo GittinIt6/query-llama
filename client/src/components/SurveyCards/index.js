@@ -9,8 +9,8 @@ import Masonry from 'react-masonry-css';
 
 const columnLayout = {
   default: 4,
-  1200: 3,
-  700: 2,
+  1100: 3,
+  760: 2,
   500: 1
 };
 
