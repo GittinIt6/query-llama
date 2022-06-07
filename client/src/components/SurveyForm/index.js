@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
 import { FiArrowLeftCircle } from "react-icons/fi";
@@ -8,24 +8,35 @@ import { ADD_SURVEY, ADD_ANSWER } from '../../utils/mutations';
 import { QUERY_SURVEYS, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
-
-const SurveyForm = ({ surveyId, props }) => {
+let cacheId;
+const SurveyForm = () => {
   const [question, setQuestion] = useState('');
 
 
   const [characterCount, setCharacterCount] = useState(0);
   const [characterCount2, setCharacterCount2] = useState(0);
 
-  const [addSurvey, { error }] = useMutation(ADD_SURVEY, {
+  const [addSurvey, { loading, error }] = useMutation(ADD_SURVEY, {
     update(cache, { data: { addSurvey } }) {
+      let obj = cache.data.data
+      let lastKey = Object.keys(obj).pop();
+      let v = obj[lastKey]
+      cacheId = v._id
+      console.log(obj);
+      console.log(lastKey)
+      console.log(v)
+      console.log(v._id)
+      // console.log(cache.data.data[cache.data.data.length - 1]._id);
+      // console.log(cache.data.data[cache.data.data.length - 1]._id);
       try {
         const { surveys } = cache.readQuery({ query:
         QUERY_SURVEYS});
-
+        console.log(JSON.stingify(cache.readQuery({ query: QUERY_ME })))
         cache.writeQuery({
           query: QUERY_SURVEYS,
           data: { surveys: [addSurvey, ...surveys] },
         });
+        // return data;
       } catch (e) {
         console.error(e)
       }
@@ -43,23 +54,20 @@ const SurveyForm = ({ surveyId, props }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     var data = {};
-
+    
       data = await addSurvey({
         variables: { 
           question,
           // surveyAuthor: Auth.getProfile().data.username,
           surveyAuthor: "New Author",
           isPublic: true
-        },
+        }
       });
-
-
-      console.log( JSON.stringify(...data));
-      console.log(`------------------Id for new question is ${data._id}--------------`);
-
+      
       setQuestion('');
-  };
 
+  };
+  console.log(cacheId);
 
   // const handleAnswerSubmit = async ({ surveyId }, event) =>{
   //   event.preventDefault();
