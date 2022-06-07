@@ -23,3 +23,32 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_SURVEY = gql`
+  mutation addSurvey($question: String!, $isPublic: Boolean!, $surveyAuthor: String!) {
+  addSurvey(question: $question, isPublic: $isPublic, surveyAuthor: $surveyAuthor) {
+    _id
+    question
+    surveyAuthor
+    expireTime
+    answers {
+      _id
+      answerText
+    }
+  }
+}
+`;
+
+export const ADD_ANSWER = gql`
+  mutation addAnswer($surveyId: ID!, $answerText: String!) {
+  addAnswer(surveyId: $surveyId, answerText: $answerText) {
+    _id
+    question
+    surveyAuthor
+    answers {
+      _id
+      answerText
+    }
+  }
+}
+`;
