@@ -22,16 +22,17 @@ const SurveyForm = () => {
       let lastKey = Object.keys(obj).pop();
       let v = obj[lastKey]
       cacheId = v._id
-      console.log(obj);
-      console.log(lastKey)
-      console.log(v)
-      console.log(v._id)
+      console.log(`client src components index.js: obj is: ${obj}`);
+      console.log(`client src components index.js: lastKey is: ${lastKey}`)
+      console.log(`client src components index.js: v is: ${v}`)
+      console.log(`client src components index.js: v._id is: ${v._id}`)
       // console.log(cache.data.data[cache.data.data.length - 1]._id);
       // console.log(cache.data.data[cache.data.data.length - 1]._id);
       try {
         const { surveys } = cache.readQuery({ query:
         QUERY_SURVEYS});
-        console.log(JSON.stingify(cache.readQuery({ query: QUERY_ME })))
+        
+        console.log(`this is line 34(ish) of index.js: ${JSON.stringify(cache.readQuery({ query: QUERY_ME }))}`)
         cache.writeQuery({
           query: QUERY_SURVEYS,
           data: { surveys: [addSurvey, ...surveys] },
@@ -53,6 +54,7 @@ const SurveyForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log('---handleFormSubmit entry---');
     var data = {};
     
       data = await addSurvey({
@@ -65,9 +67,10 @@ const SurveyForm = () => {
       });
       
       setQuestion('');
+    console.log('~~~handleFormSubmit exit~~~');
 
   };
-  console.log(cacheId);
+  console.log(`client src components index.js: cacheID is: ${cacheId}`);
 
   // const handleAnswerSubmit = async ({ surveyId }, event) =>{
   //   event.preventDefault();
