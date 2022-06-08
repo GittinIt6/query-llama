@@ -14,6 +14,7 @@ export const QUERY_USER = gql`
   }
 `;
 
+
 export const QUERY_ME = gql`
   query me {
     me {
