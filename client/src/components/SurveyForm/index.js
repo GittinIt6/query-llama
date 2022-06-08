@@ -10,19 +10,20 @@ import { QUERY_SURVEYS, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 let cacheId;
+let cache;
+
 const SurveyForm = (props) => {
   const [question, setQuestion] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
   const [characterCount2, setCharacterCount2] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   const [addSurvey, { loading, error }] = useMutation(ADD_SURVEY, {
     update(cache, { data: { addSurvey } }) {
-      let obj = cache.data.data
-      let lastKey = Object.keys(obj).pop();
-      let v = obj[lastKey]
-      cacheId = v._id
-      console.log(`cacheID line 25: ${cacheId}`);
+      console.log(cache.data.data.ROOT_QUERY.surveys);
+      console.log(cache);
+ 
       // console.log(`client src components index.js: obj is: ${obj}`);
       // console.log(`client src components index.js: lastKey is: ${lastKey}`)
       // console.log(`client src components index.js: v is: ${v}`)
@@ -30,19 +31,33 @@ const SurveyForm = (props) => {
       // console.log(cache.data.data[cache.data.data.length - 1]._id);
       // console.log(cache.data.data[cache.data.data.length - 1]._id);
       try {
+        console.log(cache.data.data.ROOT_QUERY.surveys)
+        let obj = cache.data.data.ROOT_QUERY.surveys
+        let firstObj = Object.values(obj).shift();
+        console.log(firstObj)
+        let v = Object.values(firstObj).pop().split(':')
+        cacheId = v[1]
+        console.log(cacheId)
+        console.log(`cacheID line 25: ${cacheId}`);
+   
+
+        // return data;
+      } catch (e) {
+        console.error(e)
+      } finally {
+        console.log(cache);
         const { surveys } = cache.readQuery({ query:
         QUERY_SURVEYS});
-        console.log(`const { surveys } is ${JSON.stringify(surveys)}`);
-        console.log(`this is line 34(ish) of index.js: ${JSON.stringify(cache.readQuery({ query: QUERY_ME }))}`)
+   
+        // console.log(`const { surveys } is ${JSON.stringify(surveys)}`);
+        // console.log(`this is line 34(ish) of index.js: ${JSON.stringify(cache.readQuery({ query: QUERY_ME }))}`)
+
         cache.writeQuery({
           query: QUERY_SURVEYS,
           data: { surveys: [addSurvey, ...surveys] },
         });
-        // return data;
-      } catch (e) {
-        console.error(e)
       }
-      console.log('outside of try');
+      // console.log('outside of try');
       //MJ COMMENT: Commented out below, not sure what it's doing?? me is returning null, I think QUERY_ME isn't working
       // const { me } = cache.readQuery({ query: QUERY_ME });
       // console.log(`const me line 47 is: ${me}`);
@@ -58,23 +73,24 @@ const SurveyForm = (props) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log('---handleFormSubmit entry---');
+    // console.log('---handleFormSubmit entry---');
     var data = {};
-    
+
       data = await addSurvey({
-        variables: { 
+        variables: {
           question,
           // surveyAuthor: Auth.getProfile().data.username,
           surveyAuthor: "New Author",
           isPublic: true
         }
       });
-      
+      console.log(cacheId);
       setQuestion('');
-    console.log('~~~handleFormSubmit exit~~~');
+
+    // console.log('~~~handleFormSubmit exit~~~');
 
   };
-  console.log(`client src components index.js: cacheID is: ${cacheId}`);
+  // console.log(`client src components index.js: cacheID is: ${cacheId}`);
 
   // const handleAnswerSubmit = async ({ surveyId }, event) =>{
   //   event.preventDefault();
