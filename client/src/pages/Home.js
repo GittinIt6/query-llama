@@ -3,31 +3,40 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { IconContext } from 'react-icons/lib';
 import { FiPlusCircle } from "react-icons/fi";
+
+import 'animate.css';
+
 import  SurveyForm  from '../components/SurveyForm'
 
 import SurveyCards from '../components/SurveyCards';
 // Import the query we are going to execute from its file
 import { QUERY_SURVEYS } from '../utils/queries';
 
+
 const Home = () => {
   const { loading, data } = useQuery(QUERY_SURVEYS);
-  const [surveyFormVisibility, setFormVisibility] = useState(false);
+  const [isVisbile, setVisibility] = useState(false);
+  const [inProp, setInProp] = useState(false);
 
-  useEffect(() => {
-    let openFormButton = document.getElementById('open-add-survey-button');
+  // useEffect(() => {
+  //   let openFormButton = document.getElementById('open-add-survey-button');
 
-    const openAddSurvey = () => setFormVisibility(true);
+  //   const openAddSurvey = () => setVisibility(true);
 
-    openFormButton.addEventListener('click', openAddSurvey);
+  //   openFormButton.addEventListener('click', openAddSurvey);
 
-    // return a clean-up function
-    return () => {
-      openFormButton.removeEventListener('click', openAddSurvey);
-    }
-  }, [])
+  //   // return a clean-up function
+  //   return () => {
+  //     openFormButton.removeEventListener('click', openAddSurvey);
+  //   }
+  // }, [])
+
+  const handleOpen = () => {
+    setVisibility(true);
+  }
 
   const handleClose = () => {
-    setFormVisibility(false)
+    setVisibility(false);
   }
 
   // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
@@ -43,10 +52,13 @@ const Home = () => {
             />
         )}
       <div>
-        <IconContext.Provider value={{ className: "open-add-form-button", size: 30 }}>
-          <button id='open-add-survey-button' className='add-survey-button'><FiPlusCircle /></button>
-        </IconContext.Provider>
-        <SurveyForm isVisible={surveyFormVisibility} handleClose={handleClose} />
+        {!isVisbile ? (
+          <IconContext.Provider value={{ className: "open-add-form-button", size: 30 }}>
+            <button id='open-add-survey-button' className='add-survey-button' onClick={handleOpen}><FiPlusCircle /></button>
+          </IconContext.Provider>
+        ) : (
+            <SurveyForm isVisbile={isVisbile} handleClose={handleClose} className={'animate__animated animate__bounce'} />
+        )}
       </div>
     </main>
   );

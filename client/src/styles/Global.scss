@@ -25,5 +25,17 @@ h2 {
     color: $black;
 }
 
-
+.pop-over-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 90%;
+    top: 0;
+    right: 0;
+    background-color: $off-white;
+    transition: display .3s;
+    box-shadow:
+    -4px 0px 2.2px rgba(0, 0, 0, 0.02),
+    -8px 0px 10px rgba(0, 0, 0, 0.035),
+    -16px 0px 33.4px rgba(0, 0, 0, 0.05);
+}
 
