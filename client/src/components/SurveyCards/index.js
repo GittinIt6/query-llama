@@ -35,7 +35,7 @@ const SurveyCards = ({surveys}) => {
         </div>
         <div className='qusetion-answer-wrapper'>
         <h2 className='survey-card-question'>{survey.question}</h2>
-        <p className='top-answer'><span className='top-answer-label'>Top Answer </span>: Example of a top answer.</p>
+        <p className='top-answer'><span className='top-answer-label'>Top Answer </span>: {(survey.answers.length > 0) ? (Math.max.apply(null, survey.answers.map(item => item.voteCount))) + " votes" : "Not Answered Yet"}</p>
         {/* need an icon for this button */}
         <button className='submit-answer-btn'>submit your answer <FiArrowRight className='submit-answer-icon'/></button>
         </div>
