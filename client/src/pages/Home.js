@@ -1,10 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { IconContext } from 'react-icons/lib';
 import { FiPlusCircle } from "react-icons/fi";
-
-import 'animate.css';
 
 import  SurveyForm  from '../components/SurveyForm'
 
@@ -16,7 +14,6 @@ import { QUERY_SURVEYS } from '../utils/queries';
 const Home = () => {
   const { loading, data } = useQuery(QUERY_SURVEYS);
   const [isVisbile, setVisibility] = useState(false);
-  const [inProp, setInProp] = useState(false);
 
   // useEffect(() => {
   //   let openFormButton = document.getElementById('open-add-survey-button');
@@ -57,7 +54,7 @@ const Home = () => {
             <button id='open-add-survey-button' className='add-survey-button' onClick={handleOpen}><FiPlusCircle /></button>
           </IconContext.Provider>
         ) : (
-            <SurveyForm isVisbile={isVisbile} handleClose={handleClose} className={'animate__animated animate__bounce'} />
+          <SurveyForm isVisbile={isVisbile} handleClose={handleClose} />
         )}
       </div>
     </main>
