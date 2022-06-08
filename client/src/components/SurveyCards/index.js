@@ -40,7 +40,7 @@ const SurveyCards = ({surveys}) => {
         <button className='submit-answer-btn'>submit your answer <FiArrowRight className='submit-answer-icon'/></button>
         </div>
         {/* dynamically change time to times if anything other than 1 */}
-        <p className='answer-counter-label'>Answered<span className='answer-count'>48</span>times!</p>
+        <p className='answer-counter-label'>Answered<span className='answer-count'>{survey.answers.reduce((total, currentValue) => total = total + currentValue.voteCount,0)}</span>times!</p>
         </div>
       ))}
     </Masonry>
