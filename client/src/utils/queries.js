@@ -32,17 +32,22 @@ export const QUERY_ME = gql`
 
 export const QUERY_SURVEYS = gql`
   # create a GraphQL query to be executed by Apollo Client
-  query surveys {
-    surveys {
+  query Surveys {
+  surveys {
+    _id
+    question
+    downvotes
+    upvotes
+    answerNum
+    isValid
+    isPublic
+    expireTime
+    surveyAuthor
+    answers {
       _id
-      question
-      upvotes
-      downvotes
-      answerNum
-      isValid
-      isPublic
-      expireTime
-      surveyAuthor
+      answerText
+      voteCount
     }
   }
+}
 `;

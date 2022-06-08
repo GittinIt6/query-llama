@@ -1,18 +1,28 @@
-#open-add-survey-button {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: $red;
-    color: $white;
-    outline: none;
-    border: none;
-    box-shadow: -2px 2px 4px rgb(0 0 0 / 13%), 
-                -6px 6px 12px rgb(0 0 0 / 7%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+.survey-form-content {
+    margin: 2rem 44px;
+}
+
+.enter-question-fieldset {
+    width: 600px;
+}
+
+.survey-form-content textarea {
+    resize: none;
+    height: 160px;
+    width: 100%;
+    font-size: 20px;
+    line-height: 1.5;
+    padding: 1rem;
+}
+
+.char-count-label {
+    text-align: right;
+    margin-top: 0;
+    line-height: .5;
+    font-size: 14px;
+    color: $grey-lt;
+}
+
+.submit-survey-button {
+    margin-top: 2rem;
 }
