@@ -38,6 +38,7 @@ const typeDefs = gql`
     user(username: String!): User
     me: User
     surveys: [Survey]
+    survey(surveyId: ID!): Survey
   }
 
   type Mutation {
