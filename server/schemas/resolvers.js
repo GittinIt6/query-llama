@@ -19,6 +19,9 @@ const resolvers = {
     surveys: async () => {
       return Survey.find();
     },
+    survey: async (parent, { surveyId }) => {
+      return Survey.findOne({ _id: surveyId });
+    },
   },
 
   Mutation: {
