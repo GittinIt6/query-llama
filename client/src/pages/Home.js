@@ -4,7 +4,8 @@ import { useQuery } from '@apollo/client';
 import { IconContext } from 'react-icons/lib';
 import { FiPlusCircle } from "react-icons/fi";
 
-import  SurveyForm  from '../components/SurveyForm'
+import SurveyForm  from '../components/SurveyForm'
+import AnswerSurvey from '../components/AnswerSurvey';
 
 import SurveyCards from '../components/SurveyCards';
 // Import the query we are going to execute from its file
