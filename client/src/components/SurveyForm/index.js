@@ -11,51 +11,46 @@ import { QUERY_SURVEYS, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
 let cacheId;
 let cache;
+let v;
 
 const SurveyForm = (props) => {
   const [question, setQuestion] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
-  const [characterCount2, setCharacterCount2] = useState(0);
-  const [counter, setCounter] = useState(0);
 
   const [addSurvey, { loading, error }] = useMutation(ADD_SURVEY, {
     update(cache, { data: { addSurvey } }) {
-      console.log(cache.data.data.ROOT_QUERY.surveys);
+      console.log(cache.data.data);
+      console.log(cache.data.data.ROOT_QUERY.surveys)
       console.log(cache);
  
-      // console.log(`client src components index.js: obj is: ${obj}`);
-      // console.log(`client src components index.js: lastKey is: ${lastKey}`)
-      // console.log(`client src components index.js: v is: ${v}`)
-      // console.log(`client src components index.js: v._id is: ${v._id}`)
-      // console.log(cache.data.data[cache.data.data.length - 1]._id);
-      // console.log(cache.data.data[cache.data.data.length - 1]._id);
       try {
-        console.log(cache.data.data.ROOT_QUERY.surveys)
         let obj = cache.data.data.ROOT_QUERY.surveys
         let firstObj = Object.values(obj).shift();
         console.log(firstObj)
         let v = Object.values(firstObj).pop().split(':')
         cacheId = v[1]
-        console.log(cacheId)
-        console.log(`cacheID line 25: ${cacheId}`);
-   
+
 
         // return data;
       } catch (e) {
         console.error(e)
       } finally {
         console.log(cache);
+        // console.log(cache.data.data.ROOT_QUERY.surveys)
+        // let obj = cache.data.data
+        // let firstObj = Object.values(obj).pop();
+        // console.log(firstObj);
+        // let v = Object.values(firstObj)[1]
+        // console.log(v)
         const { surveys } = cache.readQuery({ query:
-        QUERY_SURVEYS});
-   
-        // console.log(`const { surveys } is ${JSON.stringify(surveys)}`);
-        // console.log(`this is line 34(ish) of index.js: ${JSON.stringify(cache.readQuery({ query: QUERY_ME }))}`)
+          QUERY_SURVEYS});
+  
+          cache.writeQuery({
+            query: QUERY_SURVEYS,
+            data: { surveys: [addSurvey, ...surveys] },
+          });
 
-        cache.writeQuery({
-          query: QUERY_SURVEYS,
-          data: { surveys: [addSurvey, ...surveys] },
-        });
       }
       // console.log('outside of try');
       //MJ COMMENT: Commented out below, not sure what it's doing?? me is returning null, I think QUERY_ME isn't working
@@ -68,8 +63,7 @@ const SurveyForm = (props) => {
     },
   });
 
-  const [answerText, setAnswerText] = useState('');
-  const [addAnswer, { answerError }] = useMutation(ADD_ANSWER);
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -80,33 +74,17 @@ const SurveyForm = (props) => {
         variables: {
           question,
           // surveyAuthor: Auth.getProfile().data.username,
-          surveyAuthor: "New Author",
           isPublic: true
         }
       });
-      console.log(cacheId);
+      console.log(v);
       setQuestion('');
-
     // console.log('~~~handleFormSubmit exit~~~');
 
   };
   // console.log(`client src components index.js: cacheID is: ${cacheId}`);
+console.log(v);
 
-  // const handleAnswerSubmit = async ({ surveyId }, event) =>{
-  //   event.preventDefault();
-
-  //   try {
-  //     const { answerData } = await addAnswer({
-  //       variables: {
-  //         surveyId,
-  //         answerText
-  //       },
-  //     });
-  //     setAnswerText('');
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
 
 
   const handleChange = (event) => {
@@ -117,10 +95,6 @@ const SurveyForm = (props) => {
       setCharacterCount(value.length);
     }
 
-    if (name === 'answer' && value.length <= 280) {
-      setAnswerText(value);
-      setCharacterCount2(value.length);
-    }
   }
 
       return (
@@ -137,6 +111,7 @@ const SurveyForm = (props) => {
         
               {Auth.loggedIn() ? (
                 <>
+                {/* question input form */}
                   <form
                     className="add-survey-form"
                     onSubmit={handleFormSubmit}

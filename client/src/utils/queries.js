@@ -24,7 +24,6 @@ export const QUERY_ME = gql`
       surveys {
         _id
         question
-        surveyAuthor
       }
     }
   }

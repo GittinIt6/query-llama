@@ -49,11 +49,11 @@ const resolvers = {
         question,
         isPublic,
         expireTime,
-        surveyAuthor,
+        surveyAuthor
       });
       return survey;
     },
-    addAnswer: async (parent, { surveyId, answerText }) => {
+    addAnswer: async (parent, { surveyId, answerText }, context) => {
       return Survey.findOneAndUpdate(
         { _id: surveyId },
         {

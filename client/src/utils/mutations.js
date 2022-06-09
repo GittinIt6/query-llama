@@ -40,7 +40,7 @@ export const ADD_SURVEY = gql`
 `;
 
 export const ADD_ANSWER = gql`
-  mutation addAnswer($surveyId: ID!, $answerText: String!) {
+  mutation addAnswer($surveyId: String!, $answerText: String!) {
   addAnswer(surveyId: $surveyId, answerText: $answerText) {
     _id
     question
