@@ -85,10 +85,27 @@ const SurveyForm = (props) => {
         }
       });
       console.log(cacheId);
+      //example returned JSON.stringify(data):
+      // $$$ data is {"data":{"addSurvey":{"__typename":"Survey","_id":"62a167d69d98375fc8faa833","question":"asdf202","surveyAuthor":"New Author","expireTime":null,"answers":[]}}}
+      // let v = Object.values(JSON.stringify(data)).pop
+      let v = Object.values(data)
+      v = v[0]
+      v = Object.values(v)[0]
+      v = Object.values(v)[1]
+      let fuckingID = v;
+      console.log(`THE DAMN ID IS: ${fuckingID}`);
+      console.log(`$$$v is: ${JSON.stringify(v)}`);
+      console.log(`$$$ data is ${JSON.stringify(Object.values(data))}`);
       setQuestion('');
 
     // console.log('~~~handleFormSubmit exit~~~');
-
+    const { answerData } = await addAnswer({
+      variables: {
+        surveyId: fuckingID,
+        answerText
+      },
+    });
+      setAnswerText('');
   };
   // console.log(`client src components index.js: cacheID is: ${cacheId}`);
 
@@ -156,6 +173,13 @@ const SurveyForm = (props) => {
                     Character Count: {characterCount}/280
                     {error && <span className="ml-2">{error.message}</span>}
                   </p>
+                  <h3 className='heading-underline'>answer 1</h3>
+                      <textarea
+                        name="answer"
+                        placeholder="example: 23 MPH"
+                        value={answerText}
+                        onChange={handleChange}
+                      ></textarea>
                     </div>
                     
         
