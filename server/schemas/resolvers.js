@@ -39,7 +39,7 @@ const resolvers = {
       });
       return survey;
     },
-    addAnswer: async (parent, { surveyId, answerText }, context) => {
+    addAnswer: async (parent, { surveyId, answerText }) => {
       return Survey.findOneAndUpdate(
         { _id: surveyId },
         {

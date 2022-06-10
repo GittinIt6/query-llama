@@ -40,7 +40,7 @@ export const ADD_SURVEY = gql`
 `;
 
 export const ADD_ANSWER = gql`
-  mutation addAnswer($surveyId: String!, $answerText: String!) {
+  mutation addAnswer($surveyId: ID!, $answerText: String!) {
   addAnswer(surveyId: $surveyId, answerText: $answerText) {
     _id
     question
@@ -81,7 +81,7 @@ mutation DislikeUp($surveyId: String!) {
 `;
 
 export const DOWNVOTE_DECREASE = gql`
-mutation dislikeDown($surveyId: String!) {
+mutation dislikeDown($surveyId: ID!) {
   DislikeUp(surveyId: $surveyId) {
     _id
     downvotes
