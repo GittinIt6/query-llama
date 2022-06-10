@@ -6,13 +6,25 @@
     width: 600px;
 }
 
-.survey-form-content textarea {
+.enter-question-textarea{
+// .survey-form-content textarea {
     resize: none;
     height: 160px;
     width: 100%;
     font-size: 20px;
     line-height: 1.5;
     padding: 1rem;
+}
+
+.enter-answer-textarea{
+    resize: none;
+    height: 40px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 1;
+    padding-left: 1rem;
+    padding-top: .6rem;
+    padding-bottom: .5rem;
 }
 
 .char-count-label {
