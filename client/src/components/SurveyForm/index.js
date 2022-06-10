@@ -36,11 +36,6 @@ const SurveyForm = (props) => {
         // return data;
       } catch (e) {
         console.error(e)
-      } finally {
-        console.log(cache);
-
-
-
       }
       // console.log('outside of try');
       //MJ COMMENT: Commented out below, not sure what it's doing?? me is returning null, I think QUERY_ME isn't working
@@ -63,7 +58,7 @@ const SurveyForm = (props) => {
       data = await addSurvey({
         variables: {
           question,
-          // surveyAuthor: Auth.getProfile().data.username,
+          surveyAuthor: Auth.getProfile().data.username,
           isPublic: true
         }
       });
@@ -101,9 +96,8 @@ console.log(v);
       setQuestion(value);
       setCharacterCount(value.length);
     }
-    else if (name === 'answer' && value.length <= 280) {
+    if (name === 'answer' && value.length <= 280) {
       setAnswerText(value);
-      // setCharacterCount(value.length);
     }
 
   }
