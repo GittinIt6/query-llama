@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 
 import AnswerSurvey from '../AnswerSurvey';
-import { QUERY_SINGLE_SURVEY } from '../../utils/queries';
+
 
 // CLick 'submit an answer' -- grab the id of the question 
 // Open the AnswerSurvey component
@@ -33,7 +33,6 @@ const SurveyCards = ({surveys}) => {
 
   const handleClick = (e) => {
     let id = e.target.parentNode.parentNode.id;
-    console.log(id);
     setVisibility(true);
     setSurveyId(id);
 
@@ -41,8 +40,6 @@ const SurveyCards = ({surveys}) => {
     //   variables: { surveyId : id }
     // })
  };
-
- console.log(surveyId);
 
 
  const handleClose = () => {
