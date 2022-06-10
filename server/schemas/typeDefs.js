@@ -46,6 +46,10 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addSurvey(question: String!, isPublic: Boolean, expireTime: String, surveyAuthor: String!): Survey
     addAnswer(surveyId: String!, answerText: String!): Survey
+    likeUp(surveyId: String!): Survey
+    likeDown(surveyId: String!): Survey
+    dislikeUp(surveyId: String!): Survey
+    dislikeDown(surveyId: String!): Survey
   }
 `;
 

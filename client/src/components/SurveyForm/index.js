@@ -9,13 +9,13 @@ import { ADD_SURVEY, ADD_ANSWER } from '../../utils/mutations';
 import { QUERY_SURVEYS, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
-let cacheId;
 let v;
 
 const SurveyForm = (props) => {
   const [question, setQuestion] = useState('');
-
   const [characterCount, setCharacterCount] = useState(0);
+  const [answerText, setAnswerText] = useState('');
+  const [addAnswer, { answerError }] = useMutation(ADD_ANSWER);
 
   const [addSurvey, { loading, error }] = useMutation(ADD_SURVEY, {
     update(cache, { data: { addSurvey } }) {
@@ -24,24 +24,6 @@ const SurveyForm = (props) => {
       console.log(cache);
  
       try {
-        let obj = cache.data.data.ROOT_QUERY.surveys
-        let firstObj = Object.values(obj).shift();
-        console.log(firstObj)
-        let v = Object.values(firstObj).pop().split(':')
-        cacheId = v[1]
-
-
-        // return data;
-      } catch (e) {
-        console.error(e)
-      } finally {
-        console.log(cache);
-        // console.log(cache.data.data.ROOT_QUERY.surveys)
-        // let obj = cache.data.data
-        // let firstObj = Object.values(obj).pop();
-        // console.log(firstObj);
-        // let v = Object.values(firstObj)[1]
-        // console.log(v)
         const { surveys } = cache.readQuery({ query:
           QUERY_SURVEYS});
   
@@ -49,6 +31,15 @@ const SurveyForm = (props) => {
             query: QUERY_SURVEYS,
             data: { surveys: [addSurvey, ...surveys] },
           });
+
+
+        // return data;
+      } catch (e) {
+        console.error(e)
+      } finally {
+        console.log(cache);
+
+
 
       }
       // console.log('outside of try');
@@ -76,7 +67,7 @@ const SurveyForm = (props) => {
           isPublic: true
         }
       });
-      console.log(cacheId);
+ 
       //example returned JSON.stringify(data):
       // $$$ data is {"data":{"addSurvey":{"__typename":"Survey","_id":"62a167d69d98375fc8faa833","question":"asdf202","surveyAuthor":"New Author","expireTime":null,"answers":[]}}}
       // let v = Object.values(JSON.stringify(data)).pop

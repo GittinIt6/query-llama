@@ -30,23 +30,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // addSurvey: async (parent, { question, isPublic, expireTime }, context) => {
-    //   if (context.user) {
-    //     const survey = await Survey.create({
-    //       question,
-    //       isPublic,
-    //       expireTime,
-    //       surveyAuthor: context.user.username,
-    //     });
-
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { surveys: survey._id } }
-    //     );
-
-    //     return survey;
-    //   }
-    // },
     addSurvey: async (parent, { question, isPublic, expireTime, surveyAuthor }) => {
       const survey = await Survey.create({
         question,
@@ -67,6 +50,46 @@ const resolvers = {
           runValidators: true,
         }
       );
+    },
+    likeUp: async (parent, { surveyId }) => {
+      return Survey.findOneAndUpdate(
+        {_id: surveyId},
+    { $inc: {upvotes: 1}},
+    {
+      new:true,
+      runValidators: true
+    }
+      )
+    },
+    likeDown: async (parent, { surveyId }) => {
+      return Survey.findOneAndUpdate(
+        {_id: surveyId},
+    { $inc: {upvotes: -1}},
+    {
+      new:true,
+      runValidators: true
+    }
+      )
+    },
+    dislikeUp: async (parent, { surveyId, downvotes }) => {
+      return Survey.findOneAndUpdate(
+        {_id: surveyId},
+    { $inc: {downvotes: 1}},
+    {
+      new:true,
+      runValidators: true
+    }
+      )
+    },
+    dislikeDown: async (parent, { surveyId, downvotes }) => {
+      return Survey.findOneAndUpdate(
+        {_id: surveyId},
+    { $inc: {downvotes: -1}},
+    {
+      new:true,
+      runValidators: true
+    }
+      )
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });

@@ -52,3 +52,39 @@ export const ADD_ANSWER = gql`
   }
 }
 `;
+
+export const UPVOTE_INCREASE = gql`
+mutation LikeUp($surveyId: String!) {
+  likeUp(surveyId: $surveyId) {
+    _id
+    upvotes
+  }
+}
+`;
+
+export const UPVOTE_DECREASE = gql`
+mutation LikeDown($surveyId: String!) {
+  likeUp(surveyId: $surveyId) {
+    _id
+    upvotes
+  }
+}
+`;
+
+export const DOWNVOTE_INCREASE = gql`
+mutation DislikeUp($surveyId: String!) {
+  DislikeUp(surveyId: $surveyId) {
+    _id
+    downvotes
+  }
+}
+`;
+
+export const DOWNVOTE_DECREASE = gql`
+mutation dislikeDown($surveyId: String!) {
+  DislikeUp(surveyId: $surveyId) {
+    _id
+    downvotes
+  }
+}
+`;
