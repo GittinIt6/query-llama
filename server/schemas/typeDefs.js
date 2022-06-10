@@ -23,8 +23,8 @@ const typeDefs = gql`
   }
 
   type Answer {
-    _id: ID
-    answerText: String
+    _id: String!
+    answerText: String!
     voteCount: Int
   }
 
@@ -45,8 +45,13 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addSurvey(question: String!, isPublic: Boolean, expireTime: String, surveyAuthor: String!): Survey
-    addAnswer(surveyId: ID!, answerText: String!): Survey
+    addAnswer(surveyId: String!, answerText: String!): Survey
+    likeUp(surveyId: String!): Survey
+    likeDown(surveyId: String!): Survey
+    dislikeUp(surveyId: String!): Survey
+    dislikeDown(surveyId: String!): Survey
   }
 `;
 
 module.exports = typeDefs;
+

@@ -6,6 +6,7 @@ const surveySeeds = require('./surveySeeds.json');
 db.once('open', async () => {
   try {
     await User.deleteMany({});
+    await Survey.deleteMany({});
 
     await User.create(userSeeds);
     await Survey.create(surveySeeds);
