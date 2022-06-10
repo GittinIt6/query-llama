@@ -15,6 +15,11 @@ const SurveyForm = (props) => {
   const [question, setQuestion] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
   const [answerText, setAnswerText] = useState('');
+  const [answerText1, setAnswerText1] = useState('');
+  const [answerText2, setAnswerText2] = useState('');
+  const [answerText3, setAnswerText3] = useState('');
+  const [answerText4, setAnswerText4] = useState('');
+  const [answerText5, setAnswerText5] = useState('');
   const [addAnswer, { answerError }] = useMutation(ADD_ANSWER);
 
   const [addSurvey, { loading, error }] = useMutation(ADD_SURVEY, {
@@ -53,6 +58,19 @@ const SurveyForm = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     // console.log('---handleFormSubmit entry---');
+
+    if(!question) {
+      setQuestion('You must ask something!')
+    }
+    if (!answerText1) {
+      setAnswerText1('You must have at least two answers!');
+      return;
+    }
+    if (!answerText2) {
+      setAnswerText2('You must have at least two answers!')
+      return;
+    }
+
     var data = {};
 
       data = await addSurvey({
@@ -76,13 +94,53 @@ const SurveyForm = (props) => {
       console.log(`$$$ data is ${JSON.stringify(Object.values(data))}`);
       setQuestion('');
     // console.log('~~~handleFormSubmit exit~~~');
-    const { answerData } = await addAnswer({
-      variables: {
-        surveyId: fuckingID,
-        answerText
-      },
-    });
-      setAnswerText('');
+    
+    if (answerText1) {  
+      const { answerData } = await addAnswer({
+        variables: {
+          surveyId: fuckingID,
+          answerText: answerText1
+        },
+      });
+        setAnswerText1('');
+    };
+    if (answerText2) {  
+      const { answerData } = await addAnswer({
+        variables: {
+          surveyId: fuckingID,
+          answerText: answerText2
+        },
+      });
+        setAnswerText2('');
+    };
+    if (answerText3) {  
+      const { answerData } = await addAnswer({
+        variables: {
+          surveyId: fuckingID,
+          answerText: answerText3
+        },
+      });
+        setAnswerText3('');
+    };
+    if (answerText4) {  
+      const { answerData } = await addAnswer({
+        variables: {
+          surveyId: fuckingID,
+          answerText: answerText4
+        },
+      });
+        setAnswerText4('');
+    };
+    if (answerText5) {  
+      const { answerData } = await addAnswer({
+        variables: {
+          surveyId: fuckingID,
+          answerText: answerText5
+        },
+      });
+        setAnswerText5('');
+    };
+      
   };
   // console.log(`client src components index.js: cacheID is: ${cacheId}`);
 console.log(v);
@@ -90,14 +148,26 @@ console.log(v);
 
 
   const handleChange = (event) => {
-    const { name, value} = event.target;
+    const { name, value } = event.target;
 
     if (name === 'question' && value.length <= 280) {
       setQuestion(value);
       setCharacterCount(value.length);
     }
-    if (name === 'answer' && value.length <= 280) {
-      setAnswerText(value);
+    if (name === 'answer1' && value.length <= 280) {
+      setAnswerText1(value);
+    }
+    if (name === 'answer2' && value.length <= 280) {
+      setAnswerText2(value);
+    }
+    if (name === 'answer3' && value.length <= 280) {
+      setAnswerText3(value);
+    }
+    if (name === 'answer4' && value.length <= 280) {
+      setAnswerText4(value);
+    }
+    if (name === 'answer5' && value.length <= 280) {
+      setAnswerText5(value);
     }
 
   }
@@ -122,7 +192,7 @@ console.log(v);
                     onSubmit={handleFormSubmit}
                   >
                     <div className="enter-question-fieldset">
-                      <textarea
+                      <textarea className="enter-question-textarea"
                         name="question"
                         placeholder="example: what is the airspeed velocity of unladen swallow?"
                         value={question}
@@ -136,13 +206,41 @@ console.log(v);
                     Character Count: {characterCount}/280
                     {error && <span className="ml-2">{error.message}</span>}
                   </p>
-                  <h3 className='heading-underline'>answer 1</h3>
-                      <textarea
-                        name="answer"
-                        placeholder="example: 23 MPH"
-                        value={answerText}
-                        onChange={handleChange}
-                      ></textarea>
+                  <h3 className='heading-underline'>answer 1 *required</h3>
+                    <textarea className="enter-answer-textarea"
+                      name="answer1"
+                      placeholder="example: 23 MPH"
+                      value={answerText1}
+                      onChange={handleChange}
+                    ></textarea>
+                  <h3 className='heading-underline'>answer 2 *required</h3>
+                    <textarea className="enter-answer-textarea"
+                      name="answer2"
+                      placeholder="example: YES"
+                      value={answerText2}
+                      onChange={handleChange}
+                    ></textarea>
+                  <h3 className='heading-underline'>answer 3</h3>
+                    <textarea className="enter-answer-textarea"
+                      name="answer3"
+                      placeholder="example: NO"
+                      value={answerText3}
+                      onChange={handleChange}
+                    ></textarea>
+                  <h3 className='heading-underline'>answer 4</h3>
+                    <textarea className="enter-answer-textarea"
+                      name="answer4"
+                      placeholder="example: Maybe"
+                      value={answerText4}
+                      onChange={handleChange}
+                    ></textarea>
+                  <h3 className='heading-underline'>answer 5</h3>
+                    <textarea className="enter-answer-textarea"
+                      name="answer5"
+                      placeholder="example: I don't want to answer"
+                      value={answerText5}
+                      onChange={handleChange}
+                    ></textarea>
                   </div>
                     
         
