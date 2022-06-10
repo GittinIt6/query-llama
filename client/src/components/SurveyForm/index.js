@@ -101,6 +101,10 @@ console.log(v);
       setQuestion(value);
       setCharacterCount(value.length);
     }
+    else if (name === 'answer' && value.length <= 280) {
+      setAnswerText(value);
+      // setCharacterCount(value.length);
+    }
 
   }
 
@@ -145,7 +149,7 @@ console.log(v);
                         value={answerText}
                         onChange={handleChange}
                       ></textarea>
-                    </div>
+                  </div>
                     
         
                     <div className="submit-survey-button">
