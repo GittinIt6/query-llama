@@ -8,10 +8,11 @@ body, main {
 
 main {
     width: 95%;
+    min-height: 600px;
     max-width: 1200px;
     margin: auto;
+    margin-top: 8rem;
 }
-
 
 h1 {
     display: inline-block;
@@ -23,6 +24,8 @@ h1 {
 h2 {
     font-size: 24px;
     color: $black;
+    line-height: 1.25;
+    font-weight: $regular;
 }
 
 h4 {
@@ -51,26 +54,34 @@ h4 {
     align-items: center;
     gap: 16px;
     cursor: pointer;
+    transition: background-color .2s;
 }
 
+
 #open-add-survey-button {
+    padding: 0.5rem 1rem;
     position: fixed;
     right: 16px;
     bottom: 16px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: $red;
-    color: $white;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: $purple-dk;
+    color: #FFFFFE;
     outline: none;
     border: none;
-    box-shadow: -2px 2px 4px rgb(0 0 0 / 13%), 
-                -6px 6px 12px rgb(0 0 0 / 7%);
+    box-shadow: -2px 2px 4px rgb(0 0 0 / 13%), -6px 6px 12px rgb(0 0 0 / 7%);
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px;
     cursor: pointer;
+    transition: background-color .2s;
 }
+
+.primary-button:hover, #open-add-survey-button:hover {
+    background-color: #492CD7;
+ }
+
 
 .grey-layer-bg {
     width: 100%;
@@ -120,4 +131,44 @@ h4 {
     border: none;
     cursor: pointer;
 }
+
+.login-signup-card {
+    margin: auto;
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.login-signup-card .go-back-button {
+    font-size: 16px;
+    gap: 8px;
+}
+
+.login-signup-content {
+    margin-top: 2rem;
+}
+
+.login-signup-content h4 {
+    font-size: 40px;
+}
+
+form.login-signup-fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-signup-fieldset input {
+    padding: .5rem;
+    font-size: 20px;
+}
+
+.login-signup-btn {
+    display: block;
+    height: 48px;
+}
+
 
