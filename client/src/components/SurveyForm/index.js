@@ -219,7 +219,7 @@ const SurveyForm = (props) => {
                   <label>answer 2 <span className='required'>*required</span></label>
                     <input className="enter-answer-input"
                       name="answer2"
-                      placeholder="example: YES"
+                      placeholder="example: 42 KPH"
                       value={answerText2}
                       onChange={handleChange}
                     ></input>
@@ -230,7 +230,7 @@ const SurveyForm = (props) => {
                   <label>answer 3</label>
                     <input className="enter-answer-input"
                       name="answer3"
-                      placeholder="example: NO"
+                      placeholder="example: 8 GPC (Grails Per Coconut)"
                       value={answerText3}
                       onChange={handleChange}
                     ></input>
@@ -239,7 +239,7 @@ const SurveyForm = (props) => {
                   <label>answer 4</label>
                     <input className="enter-answer-input"
                       name="answer4"
-                      placeholder="example: Maybe"
+                      placeholder="example: An African or a European swallow?"
                       value={answerText4}
                       onChange={handleChange}
                     ></input>
@@ -248,7 +248,7 @@ const SurveyForm = (props) => {
                   <label>answer 5</label>
                     <input className="enter-answer-input"
                       name="answer5"
-                      placeholder="example: I don't want to answer"
+                      placeholder="example: Don't know anything about swallows"
                       value={answerText5}
                       onChange={handleChange}
                     ></input>
