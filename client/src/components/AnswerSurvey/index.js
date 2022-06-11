@@ -18,9 +18,9 @@ const AnswerSurvey = (props) => {
 
     if (survey.answers && survey.answers.length > 0) {
         answers = survey.answers.map((answer) => 
-        <div className='answer-option-wrapper'>
+        <div key={answer._id} className='answer-option-wrapper'>
         <input type="checkbox" />
-        <li key={answer._id}>{answer.answerText}</li>
+        <li>{answer.answerText}</li>
         </div>
     );
     } else {
@@ -36,6 +36,7 @@ const AnswerSurvey = (props) => {
             <button id='close-add-survey-button' className='go-back-button' onClick={props.handleClose}><FiArrowLeftCircle /> Go back</button>
             </IconContext.Provider>
 
+            <div className='answer-survey-content'>
             <h2>{survey.question}</h2>
             <ul className='answer-options-list'>
                 {answers}
@@ -47,6 +48,7 @@ const AnswerSurvey = (props) => {
             </IconContext.Provider>
             </div>
                 <img className='llama-watermark' src={LlamaWatermark} alt="watermark of Llama" />
+            </div>
             </div>
         </>
     );

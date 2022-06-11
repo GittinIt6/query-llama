@@ -180,7 +180,6 @@ const SurveyForm = (props) => {
             <IconContext.Provider value={{ className: "go-back-button", size: 30 }}>
             <button id='close-add-survey-button' className='go-back-button' onClick={props.handleClose}><FiArrowLeftCircle /> Go back</button>
             </IconContext.Provider>
-      
             <div className='survey-form-content'>
               <h4 className='heading-underline'>enter your question</h4>
         

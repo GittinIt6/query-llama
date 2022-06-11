@@ -4,8 +4,9 @@ import { useQuery } from '@apollo/client';
 import { IconContext } from 'react-icons/lib';
 import { FiPlusCircle } from "react-icons/fi";
 
+import Auth from '../utils/auth';
+
 import SurveyForm  from '../components/SurveyForm'
-import AnswerSurvey from '../components/AnswerSurvey';
 
 import SurveyCards from '../components/SurveyCards';
 // Import the query we are going to execute from its file
@@ -51,8 +52,8 @@ const Home = () => {
         )}
       <div>
         {!isVisbile ? (
-          <IconContext.Provider value={{ className: "open-add-form-button", size: 30 }}>
-            <button id='open-add-survey-button' className='add-survey-button' onClick={handleOpen}><FiPlusCircle /></button>
+          <IconContext.Provider value={{ className: "open-add-form-button", size: 20 }}>
+            <button id='open-add-survey-button' className='add-survey-button' onClick={handleOpen}><FiPlusCircle /> Add Survey</button>
           </IconContext.Provider>
         ) : (
           <SurveyForm isVisbile={isVisbile} handleClose={handleClose} />
