@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { IconContext } from "react-icons";
 import { FiThumbsUp, FiThumbsDown, FiBarChart2, FiArrowRight } from 'react-icons/fi'
+import { UPVOTE_INCREASE, UPVOTE_DECREASE, DOWNVOTE_INCREASE, DOWNVOTE_DECREASE } from '../../utils/mutations';
 
 // likely wont need this
 import { Link } from 'react-router-dom';
@@ -29,7 +31,14 @@ const SurveyCards = ({surveys}) => {
   // const { loading, data } = useQuery(QUERY_SINGLE_SURVEY);
   const [isVisbile, setVisibility] = useState(false);
   const [surveyId, setSurveyId] = useState(null);
+  const [clicked, setClicked] = useState(null);
 
+
+  const [upvoteIncrease, { error1 }] = useMutation(UPVOTE_INCREASE);
+  const [upvoteDecrease, { error2 }] = useMutation(UPVOTE_DECREASE);
+
+  const [downvoteIncrease, { error3 }] = useMutation(DOWNVOTE_INCREASE);
+  const [downvoteDecrease, { error4 }] = useMutation(DOWNVOTE_DECREASE);
 
   const handleClick = (e) => {
     let id = e.target.parentNode.parentNode.id;
@@ -47,8 +56,42 @@ const SurveyCards = ({surveys}) => {
 }
 
 
- 
+const handleUpVoteIncrease = async (id) => {
+console.log(id)
+  await upvoteIncrease({
+    variables: {
+      surveyId: id
+    }
+  })
+};
 
+const handleUpVoteDecrease = async (id) => {
+
+  await upvoteDecrease({
+    variables: {
+      surveyId: id
+    }
+  })
+  
+};
+
+const handleDownVoteIncrease = async (id2) => {
+console.log(id2)
+  await downvoteIncrease({
+    variables: {
+      surveyId: id2
+    }
+  })
+};
+
+const handleDownVoteDecrease = async (id) => {
+
+  await downvoteDecrease({
+    variables: {
+      surveyId: id
+    }
+  })
+};
 
   return (
     <>
@@ -62,8 +105,8 @@ const SurveyCards = ({surveys}) => {
         <div className='survey-card-ui'>
         <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
             <div className='upvote-downvote-ui'>
-            <FiThumbsUp className='thumbsup-icon'/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
-            <FiThumbsDown className='thumbsdown-icon' /><span className='upvote-downvote-counter'>{survey.downvotes}</span>
+            <FiThumbsUp className='thumbsup-icon' onClick={() => {handleUpVoteIncrease(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
+            <FiThumbsDown className='thumbsdown-icon' onClick={() => {handleDownVoteIncrease(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
             </div>
             <FiBarChart2 className='chart-icon'/>
         </IconContext.Provider>
