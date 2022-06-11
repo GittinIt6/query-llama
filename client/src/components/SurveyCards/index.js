@@ -32,7 +32,7 @@ const SurveyCards = ({surveys}) => {
   const [isVisbile, setVisibility] = useState(false);
   const [surveyId, setSurveyId] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const [liked, setLiked] = useState(null);
+  const [downClicked, setDownClicked] = useState(false);
 
 
   const [upvoteIncrease, { error1 }] = useMutation(UPVOTE_INCREASE);
@@ -62,6 +62,9 @@ const handleVoteUp = async (id) => {
       }
     });
     setClicked(true);
+    console.log(id)
+    var b = document.getElementById(`up-${id}`);
+    b.setAttribute("fill", "purple");
   } else {
     await upvoteDecrease({
       variables: {
@@ -69,24 +72,30 @@ const handleVoteUp = async (id) => {
       }
     });
     setClicked(false);
+    var b = document.getElementById(`up-${id}`);
+    b.setAttribute("fill", "none");
   }
 };
 
 const handleVoteDown = async (id) => {
-  if (clicked === false) {
+  if (downClicked === false) {
     await downvoteIncrease({
       variables: {
         surveyId: id
       }
     });
-    setClicked(true);
+    setDownClicked(true);
+    var b = document.getElementById(`down-${id}`);
+    b.setAttribute("fill", "orange");
   } else {
     await downvoteDecrease({
       variables: {
         surveyId: id
       }
     });
-    setClicked(false);
+    setDownClicked(false);
+    var b = document.getElementById(`down-${id}`);
+    b.setAttribute("fill", "none");
   }
 };
 
@@ -99,12 +108,12 @@ const handleVoteDown = async (id) => {
           columnClassName='survey-cards-container_column'>
     {surveys &&
       surveys.map((survey) => (
-        <div id={survey._id} key={survey._id} className="survey-card-wrapper">
+        <div key={survey._id} className="survey-card-wrapper">
         <div className='survey-card-ui'>
         <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
             <div className='upvote-downvote-ui'>
-            <FiThumbsUp className='thumbsup-icon' onClick={() => {handleVoteUp(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
-            <FiThumbsDown className='thumbsdown-icon' onClick={() => {handleVoteDown(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
+            <FiThumbsUp id={`up-${survey._id}`} className='thumbsup-icon' onClick={() => {handleVoteUp(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
+            <FiThumbsDown id={`down-${survey._id}`} className='thumbsdown-icon' onClick={() => {handleVoteDown(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
             </div>
             <FiBarChart2 className='chart-icon'/>
         </IconContext.Provider>
