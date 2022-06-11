@@ -1,6 +1,6 @@
 <h1 align="center"> QueryLlama <h1>
 
-![The main landing page is a single-page app that allows users to ask any question their hearts desire and input answers for others to vote which is the most correct to them.]()
+![The main landing page is a single-page app that allows users to ask any question their hearts desire and input answers for others to vote which is the most correct to them.](./git-files/QueryLlama-screengrab.png "Screenshot of the homepage")
 
 ![badge](https://img.shields.io/badge/license-MIT-blue)
 
