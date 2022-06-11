@@ -50,6 +50,6 @@ Check out what we used to build our app [here](https://github.com/GittinIt6/quer
 ## Questions
 If you have any questions or want to give us a shout out, look for us on GitHub at: 
 - [Nick M](https://github.com/n-r-martin "Nick's link")  
-- [Mike J](https://github.com/GittinIt6 "Nick's link")
+- [Mike J](https://github.com/GittinIt6 "Mike's link")
 - [Spencer K](https://github.com/Skerans "Spencer's link")
 

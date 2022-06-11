@@ -55,12 +55,14 @@ export const ADD_ANSWER = gql`
 
 export const ANSWER_UP = gql`
 mutation answerUp($surveyId: ID!, $answerId: ID!) {
-  _id
-  question
-  answers {
+  answerUp(surveyId: $surveyId, answerId: $answerId){
     _id
-    answerText
-    voteCount
+    question
+    answers {
+      _id
+      answerText
+      voteCount
+    }
   }
 }
 `
