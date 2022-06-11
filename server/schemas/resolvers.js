@@ -54,6 +54,21 @@ const resolvers = {
         }
       );
     },
+
+    answerUp: async (parent, { surveyId, answerId }) => {
+      return Survey.findOneAndUpdate(
+        {
+          _id: surveyId,
+          'answers._id': answerId
+        },
+    { $inc: {'answers.$.voteCount': 1}},
+    {
+      new:true,
+      runValidators: true
+    }
+      )
+    },
+
     likeUp: async (parent, { surveyId }) => {
       return Survey.findOneAndUpdate(
         {_id: surveyId},

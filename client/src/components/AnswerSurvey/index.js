@@ -14,8 +14,8 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 
 import { useMutation } from '@apollo/client';
 import LlamaWatermark from '../../images/llama-watermark.svg'
-
 import { QUERY_SINGLE_SURVEY } from '../../utils/queries';
+import { ANSWER_UP } from '../../utils/mutations';
     // Chart.register(CategoryScale);
 
 ChartJS.register(
@@ -28,7 +28,7 @@ ChartJS.register(
 )
 const AnswerSurvey = (props) => {
     const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
-        variables: { surveyId : props.id}
+        variables: { surveyId : props.id }
     });
 
     const survey = data?.survey || [];
@@ -53,6 +53,13 @@ const AnswerSurvey = (props) => {
         answers = <p>There are no answers!</p>
     }
 
+    const handleSubmit = async (event) => {
+        // event.preventDefault();
+        console.log('clicked....');
+        // console.log($('62a42089db3ed902b09c3110').value);
+        let b = document.getElementsByName('62a42089db3ed902b09c3110');
+        console.log(b);
+    }
     console.log(answerCounts);
 
     const [chartData, setChartData] = useState({
@@ -111,7 +118,7 @@ const AnswerSurvey = (props) => {
                 {answers}
             </ul>
             <IconContext.Provider value={{ className: "go-forward-button", size: 24 }}>
-                <button className="primary-button" type="submit">
+                <button className="primary-button" onClick={handleSubmit} type="submit">
                     Submit Answer <FiArrowRight />
                 </button>
             </IconContext.Provider>

@@ -41,7 +41,7 @@ const surveySchema = new Schema({
             type: String,
             required: true,
             minlength: 1,
-            maxlength: 32,
+            maxlength: 60,
             trim: true,
           },
           voteCount: {
