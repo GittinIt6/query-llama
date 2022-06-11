@@ -31,7 +31,8 @@ const SurveyCards = ({surveys}) => {
   // const { loading, data } = useQuery(QUERY_SINGLE_SURVEY);
   const [isVisbile, setVisibility] = useState(false);
   const [surveyId, setSurveyId] = useState(null);
-  const [clicked, setClicked] = useState(null);
+  const [clicked, setClicked] = useState(false);
+  const [liked, setLiked] = useState(null);
 
 
   const [upvoteIncrease, { error1 }] = useMutation(UPVOTE_INCREASE);
@@ -52,47 +53,44 @@ const SurveyCards = ({surveys}) => {
   document.body.style.overflow = "scroll";
 }
 
-<<<<<<< HEAD
 
-const handleUpVoteIncrease = async (id) => {
-console.log(id)
-  await upvoteIncrease({
-    variables: {
-      surveyId: id
-    }
-  })
+const handleVoteUp = async (id) => {
+  if (clicked === false) {
+    await upvoteIncrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setClicked(true);
+  } else {
+    await upvoteDecrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setClicked(false);
+  }
 };
 
-const handleUpVoteDecrease = async (id) => {
-
-  await upvoteDecrease({
-    variables: {
-      surveyId: id
-    }
-  })
-  
+const handleVoteDown = async (id) => {
+  if (clicked === false) {
+    await downvoteIncrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setClicked(true);
+  } else {
+    await downvoteDecrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setClicked(false);
+  }
 };
 
-const handleDownVoteIncrease = async (id2) => {
-console.log(id2)
-  await downvoteIncrease({
-    variables: {
-      surveyId: id2
-    }
-  })
-};
 
-const handleDownVoteDecrease = async (id) => {
-
-  await downvoteDecrease({
-    variables: {
-      surveyId: id
-    }
-  })
-};
-
-=======
->>>>>>> 6014a668ae26c9fb395b3667fd3f6a98cedf62b4
   return (
     <>
     <Masonry 
@@ -105,8 +103,8 @@ const handleDownVoteDecrease = async (id) => {
         <div className='survey-card-ui'>
         <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
             <div className='upvote-downvote-ui'>
-            <FiThumbsUp className='thumbsup-icon' onClick={() => {handleUpVoteIncrease(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
-            <FiThumbsDown className='thumbsdown-icon' onClick={() => {handleDownVoteIncrease(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
+            <FiThumbsUp className='thumbsup-icon' onClick={() => {handleVoteUp(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
+            <FiThumbsDown className='thumbsdown-icon' onClick={() => {handleVoteDown(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
             </div>
             <FiBarChart2 className='chart-icon'/>
         </IconContext.Provider>
