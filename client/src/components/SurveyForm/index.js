@@ -205,41 +205,56 @@ const SurveyForm = (props) => {
                     Character Count: {characterCount}/280
                     {error && <span className="ml-2">{error.message}</span>}
                   </p>
-                  <h3 className='heading-underline'>answer 1 *required</h3>
-                    <textarea className="enter-answer-textarea"
+                  <div className='required-answers-container'>
+                  <div className='answer-fieldset'>
+                  <label>answer 1 <span className='required'>*required</span></label>
+                    <input type="text" className="enter-answer-input"
                       name="answer1"
                       placeholder="example: 23 MPH"
                       value={answerText1}
                       onChange={handleChange}
-                    ></textarea>
-                  <h3 className='heading-underline'>answer 2 *required</h3>
-                    <textarea className="enter-answer-textarea"
+                    ></input>
+                  </div>
+                  <div className='answer-fieldset'>
+                  <label>answer 2 <span className='required'>*required</span></label>
+                    <input className="enter-answer-input"
                       name="answer2"
                       placeholder="example: YES"
                       value={answerText2}
                       onChange={handleChange}
-                    ></textarea>
-                  <h3 className='heading-underline'>answer 3</h3>
-                    <textarea className="enter-answer-textarea"
+                    ></input>
+                    </div>
+                   </div>
+                   <div className='optional-answers-container'>
+                     <div className='answer-fieldset'>
+                  <label>answer 3</label>
+                    <input className="enter-answer-input"
                       name="answer3"
                       placeholder="example: NO"
                       value={answerText3}
                       onChange={handleChange}
-                    ></textarea>
-                  <h3 className='heading-underline'>answer 4</h3>
-                    <textarea className="enter-answer-textarea"
+                    ></input>
+                    </div>
+                     <div className='answer-fieldset'>
+                  <label>answer 4</label>
+                    <input className="enter-answer-input"
                       name="answer4"
                       placeholder="example: Maybe"
                       value={answerText4}
                       onChange={handleChange}
-                    ></textarea>
-                  <h3 className='heading-underline'>answer 5</h3>
-                    <textarea className="enter-answer-textarea"
+                    ></input>
+                    </div>
+                     <div className='answer-fieldset'>
+                  <label>answer 5</label>
+                    <input className="enter-answer-input"
                       name="answer5"
                       placeholder="example: I don't want to answer"
                       value={answerText5}
                       onChange={handleChange}
-                    ></textarea>
+                    ></input>
+                    </div>
+                    </div>
+                    <div className='public-option-container'>
                     <input className="enter-answer-ispublic"
                       type="checkbox"
                       id="chkpublic"
@@ -247,7 +262,8 @@ const SurveyForm = (props) => {
                       value={checked}
                       defaultChecked
                       onChange={handleClick}/>
-                    <label for="chkpublic"> question is public</label>
+                    <label htmlFor="chkpublic"> question available to public</label>
+                    </div>
                   </div>
                     
         
