@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+import { IconContext } from 'react-icons/lib';
+import { FiArrowLeftCircle } from "react-icons/fi";
 
+import Footer from '../components/Footer';
 import Auth from '../utils/auth';
 
 const Login = (props) => {
@@ -40,19 +44,33 @@ const Login = (props) => {
     });
   };
 
+  const location = useLocation();
+  const history = useHistory();
+
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
+    <>
+    <main>
+      <div>
+        <div className='login-signup-card'>
+        <IconContext.Provider value={{ className: "go-back-button", size: 20 }}>
+          {location.pathname !== '/' && (
+            <button 
+              className='go-back-button' 
+              onClick={() => history.goBack()}>
+              <FiArrowLeftCircle /> Go back
+            </button>
+              )}
+          </IconContext.Provider>
+          <div className='login-signup-content'>
+          <h4>Login</h4>
+          <div>
             {data ? (
               <p>
                 Success! You may now head{' '}
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form className='login-signup-fieldset' onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
                   placeholder="Your email"
@@ -70,11 +88,11 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="primary-button login-signup-btn"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
-                  Submit
+                  Log In
                 </button>
               </form>
             )}
@@ -85,9 +103,12 @@ const Login = (props) => {
               </div>
             )}
           </div>
+          </div>
         </div>
       </div>
     </main>
+    <Footer />
+    </>
   );
 };
 

@@ -1,0 +1,24 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer*/ 
+    height: 40px;
+    background-color: $off-white;
+    border-top: solid 1px $black;
+    padding: 0 1rem;
+}
+
+.footer-positioning-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+.footer-positioning-container h3 {
+    display: inline;
+    align-self: center;
+}
+

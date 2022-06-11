@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IconContext } from 'react-icons';
+import { FiLogIn, FiLogOut, FiUserPlus, FiUser } from 'react-icons/fi'
 import Logo from '../../images/query-llama-logo.svg'
 
 import Auth from '../../utils/auth';
@@ -10,35 +12,42 @@ const Header = () => {
     Auth.logout();
   };
   return (
-    <header className="">
-      <div className="logo-title-container">
-        <div className='logo-title-flex-wrapper'>
-            <img src={Logo} alt="" />
-            <Link className="" to="/">
-              <h1 className="">QueryLlama</h1>
-            </Link>
+    <header className="header">
+      <div className='header-positioning-container'>
+        <div className="logo-title-container">
+          <div className='logo-title-flex-wrapper'>
+              <img src={Logo} alt="" />
+              <Link className="" to="/">
+                <h1 className="">QueryLlama</h1>
+              </Link>
+          </div>
         </div>
-      </div>
-        <div className='login-signup-ui'>
-          {Auth.loggedIn() ? (
-            <>
-              <Link className="" to="/me">
-                {Auth.getProfile().data.username}'s profile
-              </Link>
-              <button className="" onClick={logout}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link className="" to="/login">
-                Login
-              </Link>
-              <Link className="" to="/signup">
-                Signup
-              </Link>
-            </>
-          )}
+        <IconContext.Provider value={{ className: "header-icons", size: 24 }}>
+          <div className='login-signup-ui'>
+            {Auth.loggedIn() ? (
+              <>
+                <Link className="" to="/me">
+                  <FiUser /> {Auth.getProfile().data.username}!
+                </Link>
+                <button className="" onClick={logout}>
+                  Log Out
+                  <FiLogOut />
+                </button>
+              </>
+            ) : (
+              <>
+                <Link className="" to="/login">
+                  Log In
+                  <FiLogIn />
+                </Link>
+                <Link className="" to="/signup">
+                  Sign Up
+                  <FiUserPlus />
+                </Link>
+              </>
+            )}
+          </div>
+          </IconContext.Provider>
         </div>
     </header>
   );
