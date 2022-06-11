@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { IconContext } from "react-icons";
 import { FiThumbsUp, FiThumbsDown, FiBarChart2, FiArrowRight } from 'react-icons/fi'
+import { UPVOTE_INCREASE, UPVOTE_DECREASE, DOWNVOTE_INCREASE, DOWNVOTE_DECREASE } from '../../utils/mutations';
 
 // likely wont need this
 import { Link } from 'react-router-dom';
@@ -29,7 +31,15 @@ const SurveyCards = ({surveys}) => {
   // const { loading, data } = useQuery(QUERY_SINGLE_SURVEY);
   const [isVisbile, setVisibility] = useState(false);
   const [surveyId, setSurveyId] = useState(null);
+  const [clicked, setClicked] = useState(false);
+  const [downClicked, setDownClicked] = useState(false);
 
+
+  const [upvoteIncrease, { error1 }] = useMutation(UPVOTE_INCREASE);
+  const [upvoteDecrease, { error2 }] = useMutation(UPVOTE_DECREASE);
+
+  const [downvoteIncrease, { error3 }] = useMutation(DOWNVOTE_INCREASE);
+  const [downvoteDecrease, { error4 }] = useMutation(DOWNVOTE_DECREASE);
 
   const handleClick = (e) => {
     let id = e.target.parentNode.parentNode.id;
@@ -43,6 +53,53 @@ const SurveyCards = ({surveys}) => {
   document.body.style.overflow = "scroll";
 }
 
+
+const handleVoteUp = async (id) => {
+  if (clicked === false) {
+    await upvoteIncrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setClicked(true);
+    console.log(id)
+    var b = document.getElementById(`up-${id}`);
+    b.setAttribute("fill", "purple");
+  } else {
+    await upvoteDecrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setClicked(false);
+    var b = document.getElementById(`up-${id}`);
+    b.setAttribute("fill", "none");
+  }
+};
+
+const handleVoteDown = async (id) => {
+  if (downClicked === false) {
+    await downvoteIncrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setDownClicked(true);
+    var b = document.getElementById(`down-${id}`);
+    b.setAttribute("fill", "orange");
+  } else {
+    await downvoteDecrease({
+      variables: {
+        surveyId: id
+      }
+    });
+    setDownClicked(false);
+    var b = document.getElementById(`down-${id}`);
+    b.setAttribute("fill", "none");
+  }
+};
+
+
   return (
     <>
     <Masonry 
@@ -51,12 +108,12 @@ const SurveyCards = ({surveys}) => {
           columnClassName='survey-cards-container_column'>
     {surveys &&
       surveys.map((survey) => (
-        <div id={survey._id} key={survey._id} className="survey-card-wrapper">
+        <div key={survey._id} className="survey-card-wrapper">
         <div className='survey-card-ui'>
         <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
             <div className='upvote-downvote-ui'>
-            <FiThumbsUp className='thumbsup-icon'/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
-            <FiThumbsDown className='thumbsdown-icon' /><span className='upvote-downvote-counter'>{survey.downvotes}</span>
+            <FiThumbsUp id={`up-${survey._id}`} className='thumbsup-icon' onClick={() => {handleVoteUp(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
+            <FiThumbsDown id={`down-${survey._id}`} className='thumbsdown-icon' onClick={() => {handleVoteDown(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
             </div>
             <FiBarChart2 className='chart-icon'/>
         </IconContext.Provider>

@@ -54,7 +54,7 @@ export const ADD_ANSWER = gql`
 `;
 
 export const UPVOTE_INCREASE = gql`
-mutation LikeUp($surveyId: String!) {
+mutation likeUp($surveyId: ID!) {
   likeUp(surveyId: $surveyId) {
     _id
     upvotes
@@ -63,8 +63,8 @@ mutation LikeUp($surveyId: String!) {
 `;
 
 export const UPVOTE_DECREASE = gql`
-mutation LikeDown($surveyId: String!) {
-  likeUp(surveyId: $surveyId) {
+mutation likeDown($surveyId: ID!) {
+  likeDown(surveyId: $surveyId) {
     _id
     upvotes
   }
@@ -72,8 +72,8 @@ mutation LikeDown($surveyId: String!) {
 `;
 
 export const DOWNVOTE_INCREASE = gql`
-mutation DislikeUp($surveyId: String!) {
-  DislikeUp(surveyId: $surveyId) {
+mutation dislikeUp($surveyId: ID!) {
+  dislikeUp(surveyId: $surveyId) {
     _id
     downvotes
   }
@@ -82,7 +82,7 @@ mutation DislikeUp($surveyId: String!) {
 
 export const DOWNVOTE_DECREASE = gql`
 mutation dislikeDown($surveyId: ID!) {
-  DislikeUp(surveyId: $surveyId) {
+  dislikeDown(surveyId: $surveyId) {
     _id
     downvotes
   }
