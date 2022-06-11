@@ -11,6 +11,7 @@
     "animate.css": "^4.1.1",
     "animate.css-react": "^1.1.0",
     "graphql": "^15.4.0",
+    "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
     "magic-grid": "^3.2.4",
     "react": "^17.0.1",

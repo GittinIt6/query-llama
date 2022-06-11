@@ -1,10 +1,10 @@
 import React from 'react';
+import $ from "jquery";
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { IconContext } from 'react-icons/lib';
 import { FiPlusCircle } from "react-icons/fi";
-
-import Auth from '../utils/auth';
+import LlamaGraphicLg from '../images/llama-graphic-lg.svg';
 
 import SurveyForm  from '../components/SurveyForm'
 
@@ -40,6 +40,10 @@ const Home = () => {
     document.body.style.overflow = "scroll";
   }
 
+  $(window).on('scroll', function(){
+    $(".landing-graphic-container").css("opacity", 1 - $(window).scrollTop() / 350);
+  });
+
   // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
   const surveys = data?.surveys || [];
 
@@ -50,6 +54,11 @@ const Home = () => {
   // }
 
   return (
+    <>
+    <div className='landing-graphic-container'>
+    <h3 className='landing-subheading'>a place to unpack all your questions about everything... ever</h3>
+    <img className='landing-graphic' src={LlamaGraphicLg} alt="large graphic element of a llama" />
+  </div>
     <main>
         {loading ? (
           <div>loading...</div>
@@ -68,6 +77,7 @@ const Home = () => {
         )}
       </div>
     </main>
+    </>
   );
 };
 
