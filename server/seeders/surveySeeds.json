@@ -1,44 +1,326 @@
 [
     {
-      "question": "Test Question 1?",
+      "question": "Why can't you buy single A batteries?",
       "upvotes": 2,
       "downvotes": 3,
       "answerNum": "5558675309",
-      "isValid": true
+      "isValid": true,
+      "answers": [
+        {
+          "answerText": "Double or nothing",
+          "voteCount": 10
+        },
+        {
+          "answerText": "Shake my head",
+          "voteCount": 51
+        },
+        {
+          "answerText": "No reason",
+          "voteCount": 2
+        },
+        {
+          "answerText": "I don't know",
+          "voteCount": 37
+        },
+        {
+          "answerText": "I don't want to answer",
+          "voteCount": 4
+        }
+      ]
     },
     {
-        "question": "Test Question 2?",
+        "question": "At the ballet, you see girls dancing on their tiptoes. Why don't they just get taller girls?",
+        "upvotes": 12,
+        "downvotes": 41,
+        "answerNum": "5558675310",
+        "isValid": true,
+        "answers": [
+          {
+            "answerText": "Interesting question...",
+            "voteCount": 54
+          },
+          {
+            "answerText": "ha ha",
+            "voteCount": 2
+          },
+          {
+            "answerText": "Stop it.",
+            "voteCount": 62
+          },
+          {
+            "answerText": "I don't know",
+            "voteCount": 15
+          },
+          {
+            "answerText": "I don't want to answer",
+            "voteCount": 0
+          }
+        ]
+    },
+    {
+      "question": "Why doesn't Tarzan have a beard when he lives in a jungle with no razor?",
+      "upvotes": 24,
+      "downvotes": 31,
+      "answerNum": "5558675311",
+      "isValid": true,
+      "answers": [
+        {
+          "answerText": "Hmmm",
+          "voteCount": 122
+        },
+        {
+          "answerText": "That's how it is",
+          "voteCount": 12
+        },
+        {
+          "answerText": "Wooden Razors",
+          "voteCount": 21
+        },
+        {
+          "answerText": "I don't know",
+          "voteCount": 2
+        },
+        {
+          "answerText": "I don't want to answer",
+          "voteCount": 2
+        }
+      ]
+    },
+    {
+        "question": "Do employees at Lipton take coffee breaks?",
+        "upvotes": 19,
+        "downvotes": 5,
+        "answerNum": "5558675312",
+        "isValid": true,
+        "answers": [
+          {
+            "answerText": "Yes",
+            "voteCount": 68
+          },
+          {
+            "answerText": "No",
+            "voteCount": 12
+          },
+          {
+            "answerText": "Maybe",
+            "voteCount": 2
+          }
+        ]
+    },
+    {
+      "question": "Where do our thoughts come from?",
+      "upvotes": 2,
+      "downvotes": 3,
+      "answerNum": "5558675313",
+      "isValid": true,
+      "answers": [
+        {
+          "answerText": "Mars",
+          "voteCount": 2
+        },
+        {
+          "answerText": "Air",
+          "voteCount": 151
+        },
+        {
+          "answerText": "Water",
+          "voteCount": 21
+        },
+        {
+          "answerText": "I don't know",
+          "voteCount": 14
+        },
+        {
+          "answerText": "I don't want to answer",
+          "voteCount": 1
+        }
+      ]
+    },
+    {
+        "question": "When was the 1,000,000,000 second since January 1, 1970?",
         "upvotes": 14,
         "downvotes": 1,
-        "answerNum": "5558675310",
-        "isValid": true
+        "answerNum": "5558675314",
+        "isValid": true,
+        "answers": [
+          {
+            "answerText": "2001-09-09T01:46:40Z",
+            "voteCount": 156
+          },
+          {
+            "answerText": "2011-09-10T01:54:40Z",
+            "voteCount": 51
+          },
+          {
+            "answerText": "2021-09-09T01:46:40Z",
+            "voteCount": 2
+          },
+          {
+            "answerText": "I don't know",
+            "voteCount": 37
+          }
+        ]
     },
     {
-      "question": "Test Question 3?",
+      "question": "Do married people live longer than single people, or does it just seem longer?",
       "upvotes": 2,
       "downvotes": 3,
       "answerNum": "5558675309",
-      "isValid": true
+      "isValid": true,
+      "answers": [
+        {
+          "answerText": "Yes",
+          "voteCount": 10
+        },
+        {
+          "answerText": "No",
+          "voteCount": 51
+        },
+        {
+          "answerText": "Ask my significant other",
+          "voteCount": 2
+        },
+        {
+          "answerText": "I don't know",
+          "voteCount": 37
+        },
+        {
+          "answerText": "I don't want to answer",
+          "voteCount": 4
+        }
+      ]
     },
     {
-        "question": "Test Question 4?",
-        "upvotes": 14,
-        "downvotes": 1,
+        "question": "Would you rather?",
+        "upvotes": 12,
+        "downvotes": 41,
         "answerNum": "5558675310",
-        "isValid": true
+        "isValid": true,
+        "answers": [
+          {
+            "answerText": "Have to tell the truth",
+            "voteCount": 54
+          },
+          {
+            "answerText": "Never speak again",
+            "voteCount": 2
+          },
+          {
+            "answerText": "Lick a NY sidewalk.",
+            "voteCount": 62
+          },
+          {
+            "answerText": "Hiccups for 2 years",
+            "voteCount": 15
+          },
+          {
+            "answerText": "Be sticky for 10 years",
+            "voteCount": 0
+          }
+        ]
     },
     {
-      "question": "Test Question 5?",
+      "question": "(123 + 2 - 15 * 22) * 0 is?",
+      "upvotes": 24,
+      "downvotes": 31,
+      "answerNum": "5558675311",
+      "isValid": true,
+      "answers": [
+        {
+          "answerText": "0",
+          "voteCount": 122
+        },
+        {
+          "answerText": "Hmmm",
+          "voteCount": 12
+        },
+        {
+          "answerText": "Pi",
+          "voteCount": 21
+        },
+        {
+          "answerText": "I don't know",
+          "voteCount": 2
+        },
+        {
+          "answerText": "I don't want to answer",
+          "voteCount": 2
+        }
+      ]
+    },
+    {
+        "question": "Do you like Mud Water?",
+        "upvotes": 19,
+        "downvotes": 5,
+        "answerNum": "5558675312",
+        "isValid": true,
+        "answers": [
+          {
+            "answerText": "Yes",
+            "voteCount": 68
+          },
+          {
+            "answerText": "No",
+            "voteCount": 12
+          },
+          {
+            "answerText": "Maybe",
+            "voteCount": 2
+          }
+        ]
+    },
+    {
+      "question": "Where do our dreams come from?",
       "upvotes": 2,
       "downvotes": 3,
-      "answerNum": "5558675309",
-      "isValid": true
+      "answerNum": "5558675313",
+      "isValid": true,
+      "answers": [
+        {
+          "answerText": "Mars",
+          "voteCount": 2
+        },
+        {
+          "answerText": "Air",
+          "voteCount": 151
+        },
+        {
+          "answerText": "Water",
+          "voteCount": 21
+        },
+        {
+          "answerText": "I don't know",
+          "voteCount": 14
+        },
+        {
+          "answerText": "I don't want to answer",
+          "voteCount": 1
+        }
+      ]
     },
     {
-        "question": "Test Question 6?",
+        "question": "What is the best decade?",
         "upvotes": 14,
         "downvotes": 1,
-        "answerNum": "5558675310",
-        "isValid": true
+        "answerNum": "5558675314",
+        "isValid": true,
+        "answers": [
+          {
+            "answerText": "1980",
+            "voteCount": 156
+          },
+          {
+            "answerText": "1990",
+            "voteCount": 51
+          },
+          {
+            "answerText": "2000",
+            "voteCount": 2
+          },
+          {
+            "answerText": "2010",
+            "voteCount": 37
+          }
+        ]
     }
 ]
