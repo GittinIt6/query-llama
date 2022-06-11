@@ -5,12 +5,12 @@ import { IconContext } from 'react-icons/lib';
 import { FiArrowLeftCircle, FiArrowRight } from "react-icons/fi";
 import { useMutation } from '@apollo/client';
 import LlamaWatermark from '../../images/llama-watermark.svg'
-
 import { QUERY_SINGLE_SURVEY } from '../../utils/queries';
+import { ANSWER_UP } from '../../utils/mutations';
 
 const AnswerSurvey = (props) => {
     const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
-        variables: { surveyId : props.id}
+        variables: { surveyId : props.id }
     });
 
     const survey = data?.survey || [];
@@ -19,7 +19,7 @@ const AnswerSurvey = (props) => {
     if (survey.answers && survey.answers.length > 0) {
         answers = survey.answers.map((answer) => 
         <div key={answer._id} className='answer-option-wrapper'>
-        <input type="checkbox" />
+        <input name={answer._id} type="checkbox" />
         <li>{answer.answerText}</li>
         </div>
     );
@@ -27,6 +27,13 @@ const AnswerSurvey = (props) => {
         answers = <p>There are no answers!</p>
     }
 
+    const handleSubmit = async (event) => {
+        // event.preventDefault();
+        console.log('clicked....');
+        // console.log($('62a42089db3ed902b09c3110').value);
+        let b = document.getElementsByName('62a42089db3ed902b09c3110');
+        console.log(b);
+    }
     return (
         <>
             <div className='grey-layer-bg'></div>
@@ -42,7 +49,7 @@ const AnswerSurvey = (props) => {
                 {answers}
             </ul>
             <IconContext.Provider value={{ className: "go-forward-button", size: 24 }}>
-                <button className="primary-button" type="submit">
+                <button className="primary-button" onClick={handleSubmit} type="submit">
                     Submit Answer <FiArrowRight />
                 </button>
             </IconContext.Provider>
