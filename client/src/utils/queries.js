@@ -50,6 +50,27 @@ export const QUERY_SURVEYS = gql`
 }
 `;
 
+export const QUERY_PUBLIC_SURVEYS = gql`
+query PublicSurveys {
+  publicSurveys {
+    _id
+    question
+    upvotes
+    downvotes
+    answerNum
+    isValid
+    isPublic
+    expireTime
+    surveyAuthor
+    answers {
+      _id
+      answerText
+      voteCount
+    }
+  }
+}
+`;
+
 export const QUERY_SINGLE_SURVEY = gql`
 query getSingleSurvey($surveyId: ID!) {
   survey(surveyId: $surveyId) {

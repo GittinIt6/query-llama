@@ -22,6 +22,9 @@ const resolvers = {
     survey: async (parent, { surveyId }) => {
       return Survey.findOne({ _id: surveyId });
     },
+    publicSurveys: async () => {
+      return Survey.find({isPublic: true})
+    },
   },
 
   Mutation: {
