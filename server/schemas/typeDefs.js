@@ -39,6 +39,7 @@ const typeDefs = gql`
     me: User
     surveys: [Survey]
     survey(surveyId: ID!): Survey
+    publicSurveys: [Survey]
   }
 
   type Mutation {
