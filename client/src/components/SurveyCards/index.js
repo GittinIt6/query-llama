@@ -64,7 +64,7 @@ const handleVoteUp = async (id) => {
     setClicked(true);
     console.log(id)
     var b = document.getElementById(`up-${id}`);
-    b.setAttribute("fill", "purple");
+    b.setAttribute("fill", "#A896FB");
   } else {
     await upvoteDecrease({
       variables: {
@@ -86,7 +86,7 @@ const handleVoteDown = async (id) => {
     });
     setDownClicked(true);
     var b = document.getElementById(`down-${id}`);
-    b.setAttribute("fill", "orange");
+    b.setAttribute("fill", "#FFBE76");
   } else {
     await downvoteDecrease({
       variables: {
@@ -108,7 +108,7 @@ const handleVoteDown = async (id) => {
           columnClassName='survey-cards-container_column'>
     {surveys &&
       surveys.map((survey) => (
-        <div key={survey._id} className="survey-card-wrapper">
+        <div id={survey._id} key={survey._id} className="survey-card-wrapper">
         <div className='survey-card-ui'>
         <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
             <div className='upvote-downvote-ui'>
@@ -130,7 +130,7 @@ const handleVoteDown = async (id) => {
         </div>
       ))}
     </Masonry>
-      {isVisbile ? <AnswerSurvey id={surveyId} handleClose={handleClose} /> : null}
+      {isVisbile ? <AnswerSurvey id={surveyId} handleClick={handleClick} handleClose={handleClose} /> : null}
     </>
   );
 };
