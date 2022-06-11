@@ -11,7 +11,6 @@ import { Chart as ChartJS,
          Tooltip,
          Legend } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2'; 
-
 import { useMutation } from '@apollo/client';
 import LlamaWatermark from '../../images/llama-watermark.svg'
 import { QUERY_SINGLE_SURVEY } from '../../utils/queries';
@@ -26,10 +25,13 @@ ChartJS.register(
          Tooltip,
          Legend
 )
+
 const AnswerSurvey = (props) => {
     const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
         variables: { surveyId : props.id }
     });
+    const [disable, setDisable] = useState(false);
+    const [answerUp, { error }] = useMutation(ANSWER_UP);
 
     const survey = data?.survey || [];
 
@@ -40,7 +42,7 @@ const AnswerSurvey = (props) => {
     if (survey.answers && survey.answers.length > 0) {
             answers = survey.answers.map((answer) => 
             <div key={answer._id} className='answer-option-wrapper'>
-            <input type="checkbox" />
+            <input name={answer._id} type="checkbox" />
             <li>{answer.answerText}</li>
             </div>
         );
@@ -53,14 +55,31 @@ const AnswerSurvey = (props) => {
         answers = <p>There are no answers!</p>
     }
 
-    const handleSubmit = async (event) => {
-        // event.preventDefault();
-        console.log('clicked....');
-        // console.log($('62a42089db3ed902b09c3110').value);
-        let b = document.getElementsByName('62a42089db3ed902b09c3110');
-        console.log(b);
+    const handleAnswerUp = async (id,answerId) => {
+        await answerUp({
+            variables: {
+              surveyId: id,
+              answerId: answerId
+            }
+          });
     }
-    console.log(answerCounts);
+
+    const handleSubmit = async (event) => {
+
+        let checkedAnswers = document.querySelectorAll('input[type="checkbox"]:checked');
+        for (let i = 0; i < checkedAnswers.length; i++) {
+            await handleAnswerUp(props.id,checkedAnswers[i].name)
+        }
+
+        let allCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
+        for (let index = 0; index < allCheckBoxes.length; index++) {
+            allCheckBoxes[index].disabled = true;
+        }
+
+        setDisable(true); //disable button and change text to gray
+        document.querySelector('[name="submit-answer"]').style.color = "gray";
+    }
+    // console.log(answerCounts);
 
     const [chartData, setChartData] = useState({
         datasets: []
@@ -93,7 +112,7 @@ const AnswerSurvey = (props) => {
                }
            }
         });
-        }, [loading]);
+        }, [loading, disable]);
 
 
     return (
@@ -118,7 +137,7 @@ const AnswerSurvey = (props) => {
                 {answers}
             </ul>
             <IconContext.Provider value={{ className: "go-forward-button", size: 24 }}>
-                <button className="primary-button" onClick={handleSubmit} type="submit">
+                <button className="primary-button" disabled={disable} name="submit-answer" onClick={handleSubmit} type="submit">
                     Submit Answer <FiArrowRight />
                 </button>
             </IconContext.Provider>
