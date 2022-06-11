@@ -32,14 +32,22 @@ const Home = () => {
 
   const handleOpen = () => {
     setVisibility(true);
+    document.body.style.overflow = "hidden";
   }
 
   const handleClose = () => {
     setVisibility(false);
+    document.body.style.overflow = "scroll";
   }
 
   // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
   const surveys = data?.surveys || [];
+
+  // if (isVisbile) {
+  //   document.body.style.overflow = "hidden";
+  // } else {
+  //   document.body.style.overflow = "scroll";
+  // }
 
   return (
     <main>

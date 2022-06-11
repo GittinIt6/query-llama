@@ -16,7 +16,31 @@
     padding: 1rem;
 }
 
-.enter-answer-textarea{
+.required-answers-container {
+    border-bottom: 1px solid black;
+    padding: 0.5rem 0 1rem;
+}
+
+.optional-answers-container {
+    padding: 1rem 0 0;
+}
+
+.answer-fieldset {
+    width: 80%;
+    margin-bottom: 1rem;
+}
+
+.answer-fieldset label {
+    display: block;
+    padding-bottom: .25rem;
+}
+
+.required {
+    font-weight: $heavy;
+    color: $red;
+}
+
+.enter-answer-input{
     resize: none;
     height: 40px;
     width: 100%;
@@ -34,6 +58,19 @@
     font-size: 14px;
     color: $grey-lt;
 }
+
+.public-option-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2rem;
+}
+
+.public-option-container label {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
 
 .submit-survey-button {
     margin-top: 2rem;

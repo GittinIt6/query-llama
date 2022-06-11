@@ -44,17 +44,15 @@ const SurveyCards = ({surveys}) => {
     let id = e.target.parentNode.parentNode.id;
     setVisibility(true);
     setSurveyId(id);
-
-    // const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
-    //   variables: { surveyId : id }
-    // })
+    document.body.style.overflow = "hidden";
  };
-
 
  const handleClose = () => {
   setVisibility(false);
+  document.body.style.overflow = "scroll";
 }
 
+<<<<<<< HEAD
 
 const handleUpVoteIncrease = async (id) => {
 console.log(id)
@@ -93,6 +91,8 @@ const handleDownVoteDecrease = async (id) => {
   })
 };
 
+=======
+>>>>>>> 6014a668ae26c9fb395b3667fd3f6a98cedf62b4
   return (
     <>
     <Masonry 
