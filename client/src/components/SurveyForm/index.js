@@ -14,12 +14,13 @@ let v;
 const SurveyForm = (props) => {
   const [question, setQuestion] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
-  const [answerText, setAnswerText] = useState('');
+  // const [answerText, setAnswerText] = useState('');
   const [answerText1, setAnswerText1] = useState('');
   const [answerText2, setAnswerText2] = useState('');
   const [answerText3, setAnswerText3] = useState('');
   const [answerText4, setAnswerText4] = useState('');
   const [answerText5, setAnswerText5] = useState('');
+  const [checked, setCheckPublic] = useState(true);
   const [addAnswer, { answerError }] = useMutation(ADD_ANSWER);
 
   const [addSurvey, { loading, error }] = useMutation(ADD_SURVEY, {
@@ -63,21 +64,22 @@ const SurveyForm = (props) => {
       setQuestion('You must ask something!')
     }
     if (!answerText1) {
-      setAnswerText1('You must have at least two answers!');
+      setAnswerText1('Two answer minimum requirement!');
       return;
     }
     if (!answerText2) {
-      setAnswerText2('You must have at least two answers!')
+      setAnswerText2('Two answer minimum requirement!')
       return;
     }
 
     var data = {};
-
+    // console.log(JSON.stringify(Auth.getProfile().data));
+    console.log(`checked is ${checked}`);
       data = await addSurvey({
         variables: {
           question,
-          surveyAuthor: Auth.getProfile().data.username,
-          isPublic: true
+          surveyAuthor: Auth.getProfile().data._id,
+          isPublic: checked
         }
       });
  
@@ -96,7 +98,7 @@ const SurveyForm = (props) => {
     // console.log('~~~handleFormSubmit exit~~~');
     
     if (answerText1) {  
-      const { answerData } = await addAnswer({
+      await addAnswer({
         variables: {
           surveyId: fuckingID,
           answerText: answerText1
@@ -105,7 +107,7 @@ const SurveyForm = (props) => {
         setAnswerText1('');
     };
     if (answerText2) {  
-      const { answerData } = await addAnswer({
+      await addAnswer({
         variables: {
           surveyId: fuckingID,
           answerText: answerText2
@@ -114,7 +116,7 @@ const SurveyForm = (props) => {
         setAnswerText2('');
     };
     if (answerText3) {  
-      const { answerData } = await addAnswer({
+      await addAnswer({
         variables: {
           surveyId: fuckingID,
           answerText: answerText3
@@ -123,7 +125,7 @@ const SurveyForm = (props) => {
         setAnswerText3('');
     };
     if (answerText4) {  
-      const { answerData } = await addAnswer({
+      await addAnswer({
         variables: {
           surveyId: fuckingID,
           answerText: answerText4
@@ -132,7 +134,7 @@ const SurveyForm = (props) => {
         setAnswerText4('');
     };
     if (answerText5) {  
-      const { answerData } = await addAnswer({
+      await addAnswer({
         variables: {
           surveyId: fuckingID,
           answerText: answerText5
@@ -140,12 +142,10 @@ const SurveyForm = (props) => {
       });
         setAnswerText5('');
     };
-      
+    props.handleClose();
   };
   // console.log(`client src components index.js: cacheID is: ${cacheId}`);
   console.log(v);
-
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -169,8 +169,8 @@ const SurveyForm = (props) => {
     if (name === 'answer5' && value.length <= 280) {
       setAnswerText5(value);
     }
-
   }
+  const handleClick = () => setCheckPublic(!checked);
 
       return (
         <>
@@ -240,6 +240,14 @@ const SurveyForm = (props) => {
                       value={answerText5}
                       onChange={handleChange}
                     ></textarea>
+                    <input className="enter-answer-ispublic"
+                      type="checkbox"
+                      id="chkpublic"
+                      name="chkpublic"
+                      value={checked}
+                      defaultChecked
+                      onChange={handleClick}/>
+                    <label for="chkpublic"> question is public</label>
                   </div>
                     
         
