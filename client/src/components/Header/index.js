@@ -12,7 +12,7 @@ const Header = () => {
   const [inMoblieViewport, setViewport] = useState(false);
   const [mobileMenuOpen, setMenuOpen] = useState(false);
 
-  console.log(inMoblieViewport);
+  // console.log(inMoblieViewport);
 
   const handleMenuOpen = () => {
     setMenuOpen(true);

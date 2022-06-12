@@ -25,9 +25,9 @@ const SurveyForm = (props) => {
 
   const [addSurvey, { loading, error }] = useMutation(ADD_SURVEY, {
     update(cache, { data: { addSurvey } }) {
-      console.log(cache.data.data);
-      console.log(cache.data.data.ROOT_QUERY.surveys)
-      console.log(cache);
+      // console.log(cache.data.data);
+      // console.log(cache.data.data.ROOT_QUERY.surveys)
+      // console.log(cache);
  
       try {
         const { surveys } = cache.readQuery({ query:
@@ -74,7 +74,7 @@ const SurveyForm = (props) => {
 
     var data = {};
     // console.log(JSON.stringify(Auth.getProfile().data));
-    console.log(`checked is ${checked}`);
+    // console.log(`checked is ${checked}`);
       data = await addSurvey({
         variables: {
           question,
@@ -90,17 +90,17 @@ const SurveyForm = (props) => {
       v = v[0]
       v = Object.values(v)[0]
       v = Object.values(v)[1]
-      let fuckingID = v;
-      console.log(`THE DAMN ID IS: ${fuckingID}`);
-      console.log(`$$$v is: ${JSON.stringify(v)}`);
-      console.log(`$$$ data is ${JSON.stringify(Object.values(data))}`);
+      let newID = v;
+      // console.log(`THE DAMN ID IS: ${newID}`);
+      // console.log(`$$$v is: ${JSON.stringify(v)}`);
+      // console.log(`$$$ data is ${JSON.stringify(Object.values(data))}`);
       setQuestion('');
     // console.log('~~~handleFormSubmit exit~~~');
     
     if (answerText1) {  
       await addAnswer({
         variables: {
-          surveyId: fuckingID,
+          surveyId: newID,
           answerText: answerText1
         },
       });
@@ -109,7 +109,7 @@ const SurveyForm = (props) => {
     if (answerText2) {  
       await addAnswer({
         variables: {
-          surveyId: fuckingID,
+          surveyId: newID,
           answerText: answerText2
         },
       });
@@ -118,7 +118,7 @@ const SurveyForm = (props) => {
     if (answerText3) {  
       await addAnswer({
         variables: {
-          surveyId: fuckingID,
+          surveyId: newID,
           answerText: answerText3
         },
       });
@@ -127,7 +127,7 @@ const SurveyForm = (props) => {
     if (answerText4) {  
       await addAnswer({
         variables: {
-          surveyId: fuckingID,
+          surveyId: newID,
           answerText: answerText4
         },
       });
@@ -136,7 +136,7 @@ const SurveyForm = (props) => {
     if (answerText5) {  
       await addAnswer({
         variables: {
-          surveyId: fuckingID,
+          surveyId: newID,
           answerText: answerText5
         },
       });
@@ -145,7 +145,7 @@ const SurveyForm = (props) => {
     props.handleClose();
   };
   // console.log(`client src components index.js: cacheID is: ${cacheId}`);
-  console.log(v);
+  // console.log(v);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

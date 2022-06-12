@@ -49,10 +49,10 @@ const ViewData = (props) => {
     const [chartOptions, setChartOptions] = useState({});
 
     const setAllTheData = async () =>{
-        console.log('setAllTheData Called');
+        // console.log('setAllTheData Called');
         answerLabels = [];
         answerCounts = [];
-        console.log(survey.upvotes);
+        // console.log(survey.upvotes);
 
     if (survey.answers && survey.answers.length > 0) {
         for (let i = 0; i < survey.answers.length; i++) {
@@ -62,7 +62,7 @@ const ViewData = (props) => {
     } else {
         answers = <p>There are no answers!</p>
     }
-    console.log(answers);
+    // console.log(answers);
     // const waiting = await emptyFunction();
     answerDataMobile = {
         labels: answerLabels,
@@ -100,7 +100,7 @@ const ViewData = (props) => {
         }
     }
 
-    console.log(`data is set`);
+    // console.log(`data is set`);
     return;
     };
 

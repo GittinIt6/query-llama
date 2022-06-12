@@ -76,7 +76,6 @@ const AnswerSurvey = (props) => {
               surveyId: id
             }
           });
-          console.log(id)
           a.setAttribute("fill", "#A896FB");
           a.classList.add('clicked');
         } else {
@@ -99,20 +98,15 @@ const AnswerSurvey = (props) => {
             }
           });
           b.classList.add('clicked');
-          console.log(b)
           b.setAttribute("fill", "#FFBE76");
-          console.log(b)
         } else {
           await downvoteDecrease({
             variables: {
               surveyId: id
             }
           });
-
           b.classList.remove('clicked');
-          console.log(b)
           b.setAttribute("fill", "none");
-          console.log(b)
         }
       };
     //   end up/down vote test

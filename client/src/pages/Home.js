@@ -9,7 +9,6 @@ import LlamaGraphicLg from '../images/llama-graphic-lg.svg';
 import SurveyForm  from '../components/SurveyForm'
 
 import SurveyCards from '../components/SurveyCards';
-// Import the query we are going to execute from its file
 import { QUERY_SURVEYS } from '../utils/queries';
 
 
@@ -17,18 +16,7 @@ const Home = () => {
   const { loading, data } = useQuery(QUERY_SURVEYS);
   const [isVisbile, setVisibility] = useState(false);
 
-  // useEffect(() => {
-  //   let openFormButton = document.getElementById('open-add-survey-button');
 
-  //   const openAddSurvey = () => setVisibility(true);
-
-  //   openFormButton.addEventListener('click', openAddSurvey);
-
-  //   // return a clean-up function
-  //   return () => {
-  //     openFormButton.removeEventListener('click', openAddSurvey);
-  //   }
-  // }, [])
 
   const handleOpen = () => {
     setVisibility(true);
@@ -46,11 +34,6 @@ const Home = () => {
 
   const surveys = data?.surveys || [];
 
-  // if (isVisbile) {
-  //   document.body.style.overflow = "hidden";
-  // } else {
-  //   document.body.style.overflow = "scroll";
-  // }
 
   return (
     <>
