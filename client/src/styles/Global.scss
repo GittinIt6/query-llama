@@ -42,28 +42,42 @@ h4 {
     top: 8rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 900px;
+    width: 95%;
     z-index: -10;
+
+    @include desktop {
+        width: 900px;
+    }
 }
 
 .landing-subheading {
-    width: 50%;
-    float: left;
-    margin-top: 5rem;
+    width: 90%;
+    margin: auto;
     font-weight: $light;
     font-size: 32px;
     color: $grey-dk;
     font-style: italic;
+
+    @include tablet {
+        margin-top: 5rem;
+        width: 50%;
+        float: left;
+
+    }
 }
 
 .landing-graphic {
     width: 50%;
-    float: right;
     opacity: 1;
+    float: right;
 }
 
 .heading-underline {
     border-bottom: 1px solid $black;
+}
+
+.thumbsup-icon, .thumbsdown-icon, .chart-icon {
+    cursor: pointer;
 }
 
 .primary-button {
@@ -117,12 +131,13 @@ h4 {
     left: 0;
     z-index: 0;
     opacity: .7;
+    cursor: pointer;
 }
 
 .pop-over-wrapper {
     position: fixed;
     height: 100%;
-    width: 90%;
+    width: 100%;
     top: 0;
     right: 0;
     padding: 2rem;
@@ -133,6 +148,10 @@ h4 {
     -16px 0px 33.4px rgba(0, 0, 0, 0.05);
     z-index: 5000;
     overflow: scroll;
+
+    @include desktop {
+        width: 90%;
+    }
 }
 
 .wrapper-content {
@@ -142,10 +161,12 @@ h4 {
 }
 
 .llama-watermark {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
     z-index: -1;
+    max-width: 100px;
+    opacity: .8;
 }
 
 .go-back-button {

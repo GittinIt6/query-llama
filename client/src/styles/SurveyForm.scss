@@ -1,9 +1,15 @@
 .survey-form-content {
-    margin: 2rem 44px;
+    margin: 2rem auto;
+    width: 97.5%;
+
+    @include desktop {
+      margin: 2rem 44px;
+    }
 }
 
 .enter-question-fieldset {
-    width: 600px;
+    width: 95%;
+    max-width: 600px;
 }
 
 .enter-question-textarea{

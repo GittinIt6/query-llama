@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
 import { FiArrowLeftCircle, FiArrowRight } from "react-icons/fi";
 import { useMutation } from '@apollo/client';
-import LlamaWatermark from '../../images/llama-watermark.svg'
+import LlamaGraphicSmall from '../../images/llama-graphic-sm.svg'
 
 import { ADD_SURVEY, ADD_ANSWER } from '../../utils/mutations';
 import { QUERY_SURVEYS, QUERY_ME } from '../../utils/queries';
@@ -283,8 +283,8 @@ const SurveyForm = (props) => {
                 </p>
               )}
               </div>
-              <img className='llama-watermark' src={LlamaWatermark} alt="watermark of Llama" />
             </div>
+            <img className='llama-watermark' src={LlamaGraphicSmall} alt="watermark of Llama" />
           </div>
           </>
       );
