@@ -51,6 +51,7 @@ const typeDefs = gql`
     likeDown(surveyId: ID!): Survey
     dislikeUp(surveyId: ID!): Survey
     dislikeDown(surveyId: ID!): Survey
+    answerUp(surveyId: ID!, answerId: ID!): Survey
   }
 `;
 

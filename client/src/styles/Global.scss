@@ -11,7 +11,7 @@ main {
     min-height: 600px;
     max-width: 1200px;
     margin: auto;
-    margin-top: 30rem;
+    margin-top: 8rem;
     background: none;
 }
 
@@ -145,7 +145,7 @@ h4 {
     position: absolute;
     bottom: 0;
     right: 0;
-    z-index: 0;
+    z-index: -1;
 }
 
 .go-back-button {

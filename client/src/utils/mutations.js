@@ -53,6 +53,20 @@ export const ADD_ANSWER = gql`
 }
 `;
 
+export const ANSWER_UP = gql`
+mutation answerUp($surveyId: ID!, $answerId: ID!) {
+  answerUp(surveyId: $surveyId, answerId: $answerId){
+    _id
+    question
+    answers {
+      _id
+      answerText
+      voteCount
+    }
+  }
+}
+`
+
 export const UPVOTE_INCREASE = gql`
 mutation likeUp($surveyId: ID!) {
   likeUp(surveyId: $surveyId) {
