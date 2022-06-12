@@ -26,16 +26,31 @@ ChartJS.register(
 )
 
 const ViewData = (props) => {
+
     const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
-        variables: { surveyId : props.id }
+        variables: { surveyId : props.id },
+        pollInterval:4000,
     });
 
-    const survey = data?.survey || [];
-
+    if (loading) {console.log('loading')};
+    let survey = data?.survey || [];
     let answers;
     let answerLabels = [];
     let answerCounts = [];
+    // const emptyFunction = async () => {
+    //     return;
+    // }
 
+    const [timerSetting, setTimer] = useState(false);
+    const [chartData, setChartData] = useState({
+        datasets: []
+    });
+    const [chartOptions, setChartOptions] = useState({});
+
+    const setAllTheData = async () =>{
+        console.log('setAllTheData Called');
+        answerLabels = [];
+        answerCounts = [];
     console.log(survey.upvotes);
 
     if (survey.answers && survey.answers.length > 0) {
@@ -46,6 +61,11 @@ const ViewData = (props) => {
     } else {
         answers = <p>There are no answers!</p>
     }
+    console.log(answers);
+    // const waiting = await emptyFunction();
+    console.log(`data is set`);
+    return;
+    };
 
 
 
@@ -154,14 +174,14 @@ const ViewData = (props) => {
 
     // Desktop bar chart for Survey Response data
     // This is using useState and useEffect but is a little wonky
-    const [chartData, setChartData] = useState({
-        datasets: []
-    });
 
-    const [chartOptions, setChartOptions] = useState({});
+    
 
     useEffect(() => {
-       setChartData({
+        const waitFunc = async() =>{
+        await setAllTheData();
+        console.log(`rendering chart`);
+        setChartData({
             labels: answerLabels,
             datasets: [
                 {
@@ -175,8 +195,8 @@ const ViewData = (props) => {
                     barPercentage: .5,
                 }
             ]
-       });
-       setChartOptions({
+        });
+        setChartOptions({
            responsive: true,
            plugins: {
                legend: {
@@ -200,7 +220,20 @@ const ViewData = (props) => {
                }
            }
         });
-        }, [loading]);
+        console.log(`updated chart`);
+    }
+    
+        waitFunc();
+
+        setTimeout(async() => {
+            console.log(`setting timer`);
+            // await setAllTheData();
+            timerSetting ? setTimer(false) : setTimer(true);
+        }, 6000);
+
+    }, [timerSetting]);
+
+
 
     return (
         <>
