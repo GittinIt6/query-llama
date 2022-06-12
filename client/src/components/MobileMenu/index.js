@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { FiLogIn, FiLogOut, FiUserPlus, FiUser, FiX } from 'react-icons/fi'
-import Logo from '../../images/query-llama-logo.svg'
+import LlamaGraphicSmall from '../../images/llama-graphic-sm.svg'
 
 import Auth from '../../utils/auth';
 
@@ -19,7 +19,10 @@ const MobileMenu = (props) => {
     <div className="mobile-menu-container">
           <IconContext.Provider value={{ className: "header-icons", size: 34 }}>
           <div className='login-signup-ui'>
-              <FiX className='close-icon' onClick={props.handleClose}/>
+            <button id='close-button' onClick={props.handleClose}>
+            <FiX className='close-icon' />
+            </button>
+              
             {Auth.loggedIn() ? (
               <>
                 <Link className="" to="/me" onClick={props.handleClose}>
@@ -44,6 +47,7 @@ const MobileMenu = (props) => {
             )}
           </div>
           </IconContext.Provider>
+          <img className='mobile-menu-llama' src={LlamaGraphicSmall} alt="red outline of an illustrated llama" />
         </div>
         </>
   );
