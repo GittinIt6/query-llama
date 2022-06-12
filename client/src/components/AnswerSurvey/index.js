@@ -1,30 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { IconContext } from 'react-icons/lib';
-import { FiArrowLeftCircle, FiArrowRight, FiThumbsUp, FiThumbsDown } from "react-icons/fi";
-import { Chart as ChartJS,
-         CategoryScale,
-         LinearScale,
-         BarElement,
-         Title,
-         Tooltip,
-         Legend } from 'chart.js';
-import { Bar, Doughnut } from 'react-chartjs-2'; 
+import { FiArrowLeftCircle, FiArrowRight, FiThumbsUp, FiThumbsDown  } from "react-icons/fi";
 import { useMutation } from '@apollo/client';
-import LlamaWatermark from '../../images/llama-watermark.svg'
+import LlamaGraphicSmall from '../../images/llama-graphic-sm.svg'
 import { QUERY_SINGLE_SURVEY } from '../../utils/queries';
-import { ANSWER_UP, UPVOTE_INCREASE,UPVOTE_DECREASE, DOWNVOTE_INCREASE, DOWNVOTE_DECREASE } from '../../utils/mutations';
-    // Chart.register(CategoryScale);
+import { ANSWER_UP,  UPVOTE_INCREASE,UPVOTE_DECREASE, DOWNVOTE_INCREASE, DOWNVOTE_DECREASE } from '../../utils/mutations';
 
-ChartJS.register(
-    CategoryScale,
-         LinearScale,
-         BarElement,
-         Title,
-         Tooltip,
-         Legend
-)
 
 const AnswerSurvey = (props) => {
     const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
@@ -46,8 +28,6 @@ const AnswerSurvey = (props) => {
     //up/down vote test end
 
     let answers;
-    let answerLabels = [];
-    let answerCounts = [];
 
     if (survey.answers && survey.answers.length > 0) {
             answers = survey.answers.map((answer) => 
@@ -56,11 +36,7 @@ const AnswerSurvey = (props) => {
             <li>{answer.answerText}</li>
             </div>
         );
-
-        for (let i = 0; i < survey.answers.length; i++) {
-            answerLabels.push(survey.answers[i].answerText);
-            answerCounts.push(survey.answers[i].voteCount);
-        }    
+  
     } else {
         answers = <p>There are no answers!</p>
     }
@@ -89,132 +65,73 @@ const AnswerSurvey = (props) => {
         setDisable(true); //disable button and change text to gray
         document.querySelector('[name="submit-answer"]').style.color = "gray";
     }
-    // console.log(answerCounts);
 
-    const [chartData, setChartData] = useState({
-        datasets: []
-    });
-
-    const [chartOptions, setChartOptions] = useState({});
-
-
-    useEffect(() => {
-       setChartData({
-            labels: answerLabels,
-            datasets: [
-                {
-
-                    data: answerCounts,
-                    backgroundColor: ["hsla(4, 95%, 63%, .8)", "hsla(334, 63%, 55%, .8)", "hsla(317, 48%, 50%, .8)", "hsla(275, 54%, 53%, .8)", "hsla(252, 87%, 61%, .8)"],
-                    borderColor: ["hsl(4, 95%, 63%)", "hsl(334, 63%, 55%)", "hsl(317, 48%, 50%)", "hsl(275, 54%, 53%)", "hsl(252, 87%, 61%)"],
-                    borderWidth: 2,
-                    borderRadius: 5,
-                    categoryPercentage: .8,
-                    barPercentage: .5,
-
-                }
-            ]
-       });
-       setChartOptions({
-           responsive: true,
-           plugins: {
-               legend: {
-                   display: false,
-                   position: "bottom"
-               },
-               title: {
-                   display: false,
-                   text: survey.question,
-                   font: {
-                       size: 28,
-                       family: "'Mukta', sans-serif",
-                       weight: 400
-                   },
-                   color: '#333333',
-                   align: 'start',
-                   padding: {
-                    top: 10,
-                    bottom: 30
-                }
-               }
-           }
-        });
-        }, [loading, disable]);
-
-        // start test up/downvote
-        const handleVoteUp = async (id) => {
-            var a = document.getElementById(`up-${id}`);
-            if (a.classList.contains('clicked') === false) {
-              await upvoteIncrease({
-                variables: {
-                  surveyId: id
-                }
-              });
-              console.log(id)
-              a.setAttribute("fill", "#A896FB");
-              a.classList.add('clicked');
-            } else {
-              await upvoteDecrease({
-                variables: {
-                  surveyId: id
-                }
-              });
-              a.classList.remove('clicked')
-              a.setAttribute("fill", "none");
+    // start test up/downvote
+    const handleVoteUp = async (id) => {
+        var a = document.getElementById(`up-${id}`);
+        if (a.classList.contains('clicked') === false) {
+          await upvoteIncrease({
+            variables: {
+              surveyId: id
             }
-          };
-          
-          const handleVoteDown = async (id) => {
-            var b = document.getElementById(`down-${id}`);
-            if (b.classList.contains('clicked') === false) {
-              await downvoteIncrease({
-                variables: {
-                  surveyId: id
-                }
-              });
-              b.classList.add('clicked');
-              console.log(b)
-              b.setAttribute("fill", "#FFBE76");
-              console.log(b)
-            } else {
-              await downvoteDecrease({
-                variables: {
-                  surveyId: id
-                }
-              });
-
-              b.classList.remove('clicked');
-              console.log(b)
-              b.setAttribute("fill", "none");
-              console.log(b)
+          });
+          console.log(id)
+          a.setAttribute("fill", "#A896FB");
+          a.classList.add('clicked');
+        } else {
+          await upvoteDecrease({
+            variables: {
+              surveyId: id
             }
-          };
-        //   end up/down vote test
+          });
+          a.classList.remove('clicked')
+          a.setAttribute("fill", "none");
+        }
+      };
+      
+      const handleVoteDown = async (id) => {
+        var b = document.getElementById(`down-${id}`);
+        if (b.classList.contains('clicked') === false) {
+          await downvoteIncrease({
+            variables: {
+              surveyId: id
+            }
+          });
+          b.classList.add('clicked');
+          console.log(b)
+          b.setAttribute("fill", "#FFBE76");
+          console.log(b)
+        } else {
+          await downvoteDecrease({
+            variables: {
+              surveyId: id
+            }
+          });
 
-
+          b.classList.remove('clicked');
+          console.log(b)
+          b.setAttribute("fill", "none");
+          console.log(b)
+        }
+      };
+    //   end up/down vote test
+   
     return (
         <>
-            <div className='grey-layer-bg'></div>
+            <div className='grey-layer-bg' onClick={props.handleClose}></div>
                 <div className='pop-over-wrapper'>
                 <div className="wrapper-content" id='add-survey-form'>
             <IconContext.Provider value={{ className: "go-back-button", size: 30 }}>
             <button id='close-add-survey-button' className='go-back-button' onClick={props.handleClose}><FiArrowLeftCircle /> Go back</button>
             </IconContext.Provider>
-            {/* Up/down vote test */}
-            <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
+             {/* Up/down vote test */}
+             <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
             <div className='upvote-downvote-ui'>
             <FiThumbsUp id={`up-${survey._id}`} className={`thumbsup-icon up-${survey._id}`} onClick={() => {handleVoteUp(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
             <FiThumbsDown id={`down-${survey._id}`} className='thumbsdown-icon' onClick={() => {handleVoteDown(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
             </div>
         </IconContext.Provider>
             {/* up/down vote test end */}
-            <div className='chart-container'>
-            <h2 className='interior'>{survey.question}</h2>
-            <Bar
-                options={chartOptions}
-                data={chartData}
-                />
-            </div>
 
             <div className='answer-survey-content'>
             <h2 className='interior'>{survey.question}</h2>
@@ -227,8 +144,9 @@ const AnswerSurvey = (props) => {
                 </button>
             </IconContext.Provider>
             </div>
-                <img className='llama-watermark' src={LlamaWatermark} alt="watermark of Llama" />
+                
             </div>
+            <img className='llama-watermark' src={LlamaGraphicSmall} alt="watermark of Llama" />
             </div>
         </>
     );

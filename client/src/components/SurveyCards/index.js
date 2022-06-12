@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 
 import AnswerSurvey from '../AnswerSurvey';
+import ViewData from '../ViewData';
 
 
 // CLick 'submit an answer' -- grab the id of the question 
@@ -29,7 +30,8 @@ const columnLayout = {
 
 const SurveyCards = ({surveys}) => {
   // const { loading, data } = useQuery(QUERY_SINGLE_SURVEY);
-  const [isVisbile, setVisibility] = useState(false);
+  const [answeFormIsVisbile, setVisibilityAnswerForm] = useState(false);
+  const [viewDataIsVisible, setVisibilityViewData] = useState(false);
   const [surveyId, setSurveyId] = useState(null);
 
 
@@ -40,16 +42,28 @@ const SurveyCards = ({surveys}) => {
   const [downvoteIncrease, { error3 }] = useMutation(DOWNVOTE_INCREASE);
   const [downvoteDecrease, { error4 }] = useMutation(DOWNVOTE_DECREASE);
 
-  const handleClick = (e) => {
+  const handleOpenAnswerForm = (e) => {
     let id = e.target.parentNode.parentNode.id;
-    setVisibility(true);
+    setVisibilityAnswerForm(true);
     setSurveyId(id);
     document.body.style.overflow = "hidden";
  };
 
- const handleClose = () => {
-  setVisibility(false);
+ const handleCloseAnswerForm = () => {
+  setVisibilityAnswerForm(false);
   document.body.style.overflow = "scroll";
+}
+
+const handleOpenViewData = (e) => {
+  let id = e.target.parentNode.parentNode.id;
+  setVisibilityViewData(true);
+  setSurveyId(id);
+  document.body.style.overflow = "hidden";
+};
+
+const handleCloseViewData = () => {
+setVisibilityViewData(false);
+document.body.style.overflow = "scroll";
 }
 
 
@@ -112,7 +126,7 @@ const handleVoteDown = async (id) => {
             <FiThumbsUp id={`up-${survey._id}`} className='thumbsup-icon' onClick={() => {handleVoteUp(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
             <FiThumbsDown id={`down-${survey._id}`} className='thumbsdown-icon' onClick={() => {handleVoteDown(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
             </div>
-            <FiBarChart2 className='chart-icon'/>
+            <FiBarChart2 className='chart-icon' onClick={handleOpenViewData}/>
         </IconContext.Provider>
             <div className='clearfix'></div>
         </div>
@@ -120,14 +134,15 @@ const handleVoteDown = async (id) => {
         <h2 className='survey-card-question'>{survey.question}</h2>
         <p className='top-answer'><span className='top-answer-label'>Top Answer </span>: {(survey.answers.length > 0) ? (Math.max.apply(null, survey.answers.map(item => item.voteCount))) + " votes" : "Not Answered Yet"}</p>
         {/* need an icon for this button */}
-        <button className='submit-answer-btn' onClick={handleClick}>submit your answer <FiArrowRight className='submit-answer-icon'/></button>
+        <button className='submit-answer-btn' onClick={handleOpenAnswerForm}>submit your answer <FiArrowRight className='submit-answer-icon'/></button>
         </div>
         {/* dynamically change time to times if anything other than 1 */}
         <p className='answer-counter-label'>Answered<span className='answer-count'>{survey.answers.reduce((total, currentValue) => total = total + currentValue.voteCount,0)}</span>times!</p>
         </div>
       ))}
     </Masonry>
-      {isVisbile ? <AnswerSurvey id={surveyId} handleClick={handleClick} handleClose={handleClose} /> : null}
+      {answeFormIsVisbile ? <AnswerSurvey id={surveyId} handleClose={handleCloseAnswerForm} /> : null}
+      {viewDataIsVisible ? <ViewData id={surveyId} handleClose={handleCloseViewData} /> : null}
     </>
   );
 };
