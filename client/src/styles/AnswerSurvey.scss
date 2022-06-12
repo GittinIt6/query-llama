@@ -1,8 +1,12 @@
 .answer-survey-content, .chart-container {
-    margin: 4rem 44px;
+    margin: 2rem auto;
+    width: 97.5%;
     max-width: 800px;
-}
 
+    @include desktop {
+      margin: 4rem 44px;
+    }
+}
 .chart-container {
     max-width: 1000px;
 }
