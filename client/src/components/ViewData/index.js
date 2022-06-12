@@ -174,11 +174,8 @@ const ViewData = (props) => {
 
     // Desktop bar chart for Survey Response data
     // This is using useState and useEffect but is a little wonky
-    const [chartData, setChartData] = useState({
-        datasets: []
-    });
 
-    const [chartOptions, setChartOptions] = useState({});
+    
 
     useEffect(() => {
         const waitFunc = async() =>{
