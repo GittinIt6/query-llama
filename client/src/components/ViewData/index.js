@@ -267,6 +267,6 @@ const ViewData = (props) => {
             </div>
         </>
     );
-  };
+};
   
   export default ViewData;
