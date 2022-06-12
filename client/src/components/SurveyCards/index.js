@@ -14,7 +14,6 @@ import Masonry from 'react-masonry-css';
 import AnswerSurvey from '../AnswerSurvey';
 import ViewData from '../ViewData';
 
-
 // CLick 'submit an answer' -- grab the id of the question 
 // Open the AnswerSurvey component
 // Find one question by it's id
@@ -66,7 +65,6 @@ setVisibilityViewData(false);
 document.body.style.overflow = "scroll";
 }
 
-
 const handleVoteUp = async (id) => {
   var a = document.getElementById(`up-${id}`);
   if (a.classList.contains('clicked') === false) {
@@ -110,7 +108,6 @@ const handleVoteDown = async (id) => {
   }
 };
 
-
   return (
     <>
     <Masonry 
@@ -118,7 +115,7 @@ const handleVoteDown = async (id) => {
           className="survey-cards-container"
           columnClassName='survey-cards-container_column'>
     {surveys &&
-      surveys.map((survey) => (
+      surveys.slice(0).reverse().map((survey) => (
         <div id={survey._id} key={survey._id} className="survey-card-wrapper">
         <div className='survey-card-ui'>
         <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
@@ -146,8 +143,6 @@ const handleVoteDown = async (id) => {
     </>
   );
 };
-
-
 
 export default SurveyCards;
 
