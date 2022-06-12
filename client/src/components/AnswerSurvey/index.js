@@ -125,9 +125,9 @@ const AnswerSurvey = (props) => {
             <IconContext.Provider value={{ className: "go-back-button", size: 30 }}>
             <button id='close-add-survey-button' className='go-back-button' onClick={props.handleClose}><FiArrowLeftCircle /> Go back</button>
             </IconContext.Provider>
-             {/* Up/down vote test */}
-             <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
-            <div className='upvote-downvote-ui'>
+                {/* Up/down vote test */}
+                <IconContext.Provider value={{ size: "20px", className: "survey-card-ui-icons" }}>
+            <div id='interior-upvote-downvote-ui' className='upvote-downvote-ui'>
             <FiThumbsUp id={`up-${survey._id}`} className={`thumbsup-icon up-${survey._id}`} onClick={() => {handleVoteUp(survey._id)}}/><span className='upvote-downvote-counter'>{survey.upvotes}</span>
             <FiThumbsDown id={`down-${survey._id}`} className='thumbsdown-icon' onClick={() => {handleVoteDown(survey._id)}}/><span className='upvote-downvote-counter'>{survey.downvotes}</span>
             </div>
@@ -135,6 +135,7 @@ const AnswerSurvey = (props) => {
             {/* up/down vote test end */}
 
             <div className='answer-survey-content'>
+               
             <h2 className='interior'>{survey.question}</h2>
             <ul className='answer-options-list'>
                 {answers}

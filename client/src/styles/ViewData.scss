@@ -1,0 +1,22 @@
+.chart-container {
+    max-width: 1000px;
+}
+
+.chart-container h2 {
+    margin: 3rem 0 2rem;
+    font-size: 34px;
+}
+
+
+.doughnut-chart-container {
+    width: 100%;
+    margin: 1rem auto 4rem;
+    max-width: 500px;
+
+    @include desktop {
+        margin: 4rem 0;
+    }
+}
+
+
+

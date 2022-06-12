@@ -57,7 +57,7 @@ header {
     margin-top: 0;
     padding-bottom: 0;
     border: none;
-    transition: color .2s, margin-top .2s, padding .2s, border .2s;
+    transition: color .2s;
 }
 
 .login-signup-ui button {
@@ -69,8 +69,5 @@ header {
 
 .login-signup-ui a:hover, .login-signup-ui button:hover {
     color: $red;
-    border-bottom: 2px solid $red;
-    // padding-bottom: .25rem;
-    // margin-top: .375rem;
 }
 
