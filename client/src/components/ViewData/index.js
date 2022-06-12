@@ -26,7 +26,6 @@ ChartJS.register(
 )
 
 const ViewData = (props) => {
-
     const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
         variables: { surveyId : props.id },
         pollInterval:4000,
@@ -37,6 +36,8 @@ const ViewData = (props) => {
     let answers;
     let answerLabels = [];
     let answerCounts = [];
+    let answerDataMobile;
+    let answerOptionsMobile;
     // const emptyFunction = async () => {
     //     return;
     // }
@@ -51,7 +52,7 @@ const ViewData = (props) => {
         console.log('setAllTheData Called');
         answerLabels = [];
         answerCounts = [];
-    console.log(survey.upvotes);
+        console.log(survey.upvotes);
 
     if (survey.answers && survey.answers.length > 0) {
         for (let i = 0; i < survey.answers.length; i++) {
@@ -63,10 +64,47 @@ const ViewData = (props) => {
     }
     console.log(answers);
     // const waiting = await emptyFunction();
+    answerDataMobile = {
+        labels: answerLabels,
+        datasets: [{
+          label: 'Query Responses',
+          data: answerCounts,
+          backgroundColor: ["hsla(4, 95%, 63%, .8)", "hsla(334, 63%, 55%, .8)", "hsla(317, 48%, 50%, .8)", "hsla(275, 54%, 53%, .8)", "hsla(252, 87%, 61%, .8)"],
+          borderColor: ["hsl(4, 95%, 63%)", "hsl(334, 63%, 55%)", "hsl(317, 48%, 50%)", "hsl(275, 54%, 53%)", "hsl(252, 87%, 61%)"],
+          hoverOffset: 4,
+        }]
+      };
+
+    answerOptionsMobile = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true,
+                position: "top"
+            },
+            title: {
+                display: true,
+                text: "Query Responses",
+                font: {
+                    size: 28,
+                    family: "'Mukta', sans-serif",
+                    weight: 400
+                },
+                align: 'start',
+                color: '#333333',
+                padding: {
+                    top: 10,
+                    bottom: 20
+                }
+            }
+        }
+    }
+
     console.log(`data is set`);
     return;
     };
 
+    setAllTheData();
 
 
     // Dougnut Chart for Popularity - Static data - no useState/useEffect
@@ -131,45 +169,6 @@ const ViewData = (props) => {
     
         return () => window.removeEventListener("resize", handleResize);
       }, []);
-
-
-
-    const answerDataMobile = {
-            labels: answerLabels,
-            datasets: [{
-              label: 'Query Responses',
-              data: answerCounts,
-              backgroundColor: ["hsla(4, 95%, 63%, .8)", "hsla(334, 63%, 55%, .8)", "hsla(317, 48%, 50%, .8)", "hsla(275, 54%, 53%, .8)", "hsla(252, 87%, 61%, .8)"],
-              borderColor: ["hsl(4, 95%, 63%)", "hsl(334, 63%, 55%)", "hsl(317, 48%, 50%)", "hsl(275, 54%, 53%)", "hsl(252, 87%, 61%)"],
-              hoverOffset: 4,
-            }]
-          };
-    
-
-    const answerOptionsMobile = {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: true,
-                position: "top"
-            },
-            title: {
-                display: true,
-                text: "Query Responses",
-                font: {
-                    size: 28,
-                    family: "'Mukta', sans-serif",
-                    weight: 400
-                },
-                align: 'start',
-                color: '#333333',
-                padding: {
-                    top: 10,
-                    bottom: 20
-                }
-            }
-        }
-    }
 
 
     // Desktop bar chart for Survey Response data
