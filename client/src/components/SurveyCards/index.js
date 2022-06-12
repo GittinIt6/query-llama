@@ -33,8 +33,7 @@ const SurveyCards = ({surveys}) => {
   const [answeFormIsVisbile, setVisibilityAnswerForm] = useState(false);
   const [viewDataIsVisible, setVisibilityViewData] = useState(false);
   const [surveyId, setSurveyId] = useState(null);
-  const [clicked, setClicked] = useState(false);
-  const [downClicked, setDownClicked] = useState(false);
+
 
 
   const [upvoteIncrease, { error1 }] = useMutation(UPVOTE_INCREASE);
@@ -69,37 +68,35 @@ document.body.style.overflow = "scroll";
 
 
 const handleVoteUp = async (id) => {
-  if (clicked === false) {
+  var a = document.getElementById(`up-${id}`);
+  if (a.classList.contains('clicked') === false) {
     await upvoteIncrease({
       variables: {
         surveyId: id
       }
     });
-    setClicked(true);
-    console.log(id)
-    var b = document.getElementById(`up-${id}`);
-    b.setAttribute("fill", "#A896FB");
+    a.setAttribute("fill", "#A896FB");
+    a.classList.add('clicked');
   } else {
     await upvoteDecrease({
       variables: {
         surveyId: id
       }
     });
-    setClicked(false);
-    var b = document.getElementById(`up-${id}`);
-    b.setAttribute("fill", "none");
+    a.classList.remove('clicked')
+    a.setAttribute("fill", "none");
   }
 };
 
 const handleVoteDown = async (id) => {
-  if (downClicked === false) {
+  var b = document.getElementById(`down-${id}`);
+  if (b.classList.contains('clicked') === false) {
     await downvoteIncrease({
       variables: {
         surveyId: id
       }
     });
-    setDownClicked(true);
-    var b = document.getElementById(`down-${id}`);
+    b.classList.add('clicked');
     b.setAttribute("fill", "#FFBE76");
   } else {
     await downvoteDecrease({
@@ -107,8 +104,8 @@ const handleVoteDown = async (id) => {
         surveyId: id
       }
     });
-    setDownClicked(false);
-    var b = document.getElementById(`down-${id}`);
+
+    b.classList.remove('clicked');
     b.setAttribute("fill", "none");
   }
 };

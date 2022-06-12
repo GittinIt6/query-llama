@@ -44,7 +44,6 @@ const Home = () => {
     $(".landing-graphic-container").css("opacity", 1 - $(window).scrollTop() / 350);
   });
 
-  // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
   const surveys = data?.surveys || [];
 
   // if (isVisbile) {
