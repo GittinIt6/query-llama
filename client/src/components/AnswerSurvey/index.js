@@ -64,6 +64,7 @@ const AnswerSurvey = (props) => {
 
         setDisable(true); //disable button and change text to gray
         document.querySelector('[name="submit-answer"]').style.color = "gray";
+        props.handleClose();
     }
 
     // start test up/downvote

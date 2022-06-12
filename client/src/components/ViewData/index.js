@@ -14,7 +14,6 @@ import { Bar } from 'react-chartjs-2';
 import LlamaGraphicSmall from '../../images/llama-graphic-sm.svg'
 import { QUERY_SINGLE_SURVEY } from '../../utils/queries';
 
-
 ChartJS.register(
     CategoryScale,
          LinearScale,
@@ -43,8 +42,7 @@ const ViewData = (props) => {
     } else {
         answers = <p>There are no answers!</p>
     }
-    
-
+ 
     const [chartData, setChartData] = useState({
         datasets: []
     });
@@ -94,7 +92,6 @@ const ViewData = (props) => {
         });
         }, [loading]);
 
-
     return (
         <>
             <div className='grey-layer-bg' onClick={props.handleClose}></div>
@@ -111,7 +108,6 @@ const ViewData = (props) => {
                 data={chartData}
                 />
             </div>
-
                 
             </div>
             <img className='llama-watermark' src={LlamaGraphicSmall} alt="watermark of Llama" />
