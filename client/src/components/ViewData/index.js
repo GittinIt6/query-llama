@@ -24,16 +24,31 @@ ChartJS.register(
 )
 
 const ViewData = (props) => {
+
     const { loading, data } = useQuery(QUERY_SINGLE_SURVEY, {
-        variables: { surveyId : props.id }
+        variables: { surveyId : props.id },
+        pollInterval:4000,
     });
 
-    const survey = data?.survey || [];
-
+    if (loading) {console.log('loading')};
+    let survey = data?.survey || [];
     let answers;
     let answerLabels = [];
     let answerCounts = [];
+    // const emptyFunction = async () => {
+    //     return;
+    // }
 
+    const [timerSetting, setTimer] = useState(false);
+    const [chartData, setChartData] = useState({
+        datasets: []
+    });
+    const [chartOptions, setChartOptions] = useState({});
+
+    const setAllTheData = async () =>{
+        console.log('setAllTheData Called');
+        answerLabels = [];
+        answerCounts = [];
     if (survey.answers && survey.answers.length > 0) {
         for (let i = 0; i < survey.answers.length; i++) {
             answerLabels.push(survey.answers[i].answerText);
@@ -42,15 +57,17 @@ const ViewData = (props) => {
     } else {
         answers = <p>There are no answers!</p>
     }
- 
-    const [chartData, setChartData] = useState({
-        datasets: []
-    });
-
-    const [chartOptions, setChartOptions] = useState({});
+    console.log(answers);
+    // const waiting = await emptyFunction();
+    console.log(`data is set`);
+    return;
+    };
 
     useEffect(() => {
-       setChartData({
+        const waitFunc = async() =>{
+        await setAllTheData();
+        console.log(`rendering chart`);
+        setChartData({
             labels: answerLabels,
             datasets: [
                 {
@@ -65,8 +82,8 @@ const ViewData = (props) => {
 
                 }
             ]
-       });
-       setChartOptions({
+        });
+        setChartOptions({
            responsive: true,
            plugins: {
                legend: {
@@ -90,7 +107,20 @@ const ViewData = (props) => {
                }
            }
         });
-        }, [loading]);
+        console.log(`updated chart`);
+    }
+    
+        waitFunc();
+
+        setTimeout(async() => {
+            console.log(`setting timer`);
+            // await setAllTheData();
+            timerSetting ? setTimer(false) : setTimer(true);
+        }, 6000);
+
+    }, [timerSetting]);
+
+
 
     return (
         <>
