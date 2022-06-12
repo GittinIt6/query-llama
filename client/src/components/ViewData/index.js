@@ -110,7 +110,7 @@ const ViewData = (props) => {
             </div>
                 
             </div>
-            <img className='llama-watermark' src={LlamaGraphicSmall} alt="watermark of Llama" />
+            <img id='data-viz-llama' className='llama-watermark' src={LlamaGraphicSmall} alt="watermark of Llama" />
             </div>
         </>
     );

@@ -162,11 +162,24 @@ h4 {
 
 .llama-watermark {
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
+    bottom: -30rem;
+    right: -18rem;
     z-index: -1;
-    max-width: 100px;
-    opacity: .8;
+    opacity: 0.05;
+    width: 700px;
+
+    @include tablet {
+        opacity: .1;
+    }
+}
+
+#data-viz-llama {
+    position: fixed;
+    bottom: -35rem;
+    right: -30rem;
+    z-index: -1;
+    width: 700px;
+    opacity: 0.05;
 }
 
 .go-back-button {

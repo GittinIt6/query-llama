@@ -1,10 +1,22 @@
+#interior-upvote-downvote-ui {
+    float: none;
+    position: absolute;
+    right: 0;
+    top: 0.375rem;
+
+    @include desktop {
+        position: static;
+        margin: 4rem 44px 0;
+    }
+}
+
 .answer-survey-content, .chart-container {
-    margin: 2rem auto;
+    margin: 4rem auto;
     width: 97.5%;
     max-width: 800px;
 
     @include desktop {
-      margin: 4rem 44px;
+      margin: 1rem 44px 0;
     }
 }
 .chart-container {
@@ -35,5 +47,4 @@ h2.interior {
 .answer-option-wrapper li {
     font-size: 18px;
     line-height: 1.5;
-    font-weight: bold;
 }
