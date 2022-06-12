@@ -10,7 +10,7 @@ import Auth from '../../utils/auth';
 
 const Header = () => {
   const [inMoblieViewport, setViewport] = useState(false);
-  const [mobileMenuOpen, setMenuOpen] = useState(false) 
+  const [mobileMenuOpen, setMenuOpen] = useState(false);
 
   console.log(inMoblieViewport);
 
