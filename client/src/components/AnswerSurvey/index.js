@@ -93,10 +93,15 @@ const AnswerSurvey = (props) => {
             labels: answerLabels,
             datasets: [
                 {
-                    label: "Number of Votes per Answer",
+
                     data: answerCounts,
-                    borderColor: "#FA5246",
-                    backgroundColor: "#FA5246"
+                    backgroundColor: ["hsla(4, 95%, 63%, .8)", "hsla(334, 63%, 55%, .8)", "hsla(317, 48%, 50%, .8)", "hsla(275, 54%, 53%, .8)", "hsla(252, 87%, 61%, .8)"],
+                    borderColor: ["hsl(4, 95%, 63%)", "hsl(334, 63%, 55%)", "hsl(317, 48%, 50%)", "hsl(275, 54%, 53%)", "hsl(252, 87%, 61%)"],
+                    borderWidth: 2,
+                    borderRadius: 5,
+                    categoryPercentage: .8,
+                    barPercentage: .5,
+
                 }
             ]
        });
@@ -104,11 +109,23 @@ const AnswerSurvey = (props) => {
            responsive: true,
            plugins: {
                legend: {
-                   position: "top",
+                   display: false,
+                   position: "bottom"
                },
                title: {
-                   display: true,
-                   text: survey.question
+                   display: false,
+                   text: survey.question,
+                   font: {
+                       size: 28,
+                       family: "'Mukta', sans-serif",
+                       weight: 400
+                   },
+                   color: '#333333',
+                   align: 'start',
+                   padding: {
+                    top: 10,
+                    bottom: 30
+                }
                }
            }
         });
@@ -125,6 +142,7 @@ const AnswerSurvey = (props) => {
             </IconContext.Provider>
 
             <div className='chart-container'>
+            <h2 className='interior'>{survey.question}</h2>
             <Bar
                 options={chartOptions}
                 data={chartData}
@@ -132,7 +150,7 @@ const AnswerSurvey = (props) => {
             </div>
 
             <div className='answer-survey-content'>
-            <h2>{survey.question}</h2>
+            <h2 className='interior'>{survey.question}</h2>
             <ul className='answer-options-list'>
                 {answers}
             </ul>
